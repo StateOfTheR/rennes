@@ -1,0 +1,21 @@
+---
+title: "State Of The R in Rennes"
+site: distill::distill_website
+listing: posts
+description: |
+  Le groupe State of The R in Rennes rassemble des chercheurs et des ingénieurs utilisateurs de R et se veut un lieu de partage des connaissances autour de l'utilisation de R et de son ecosystème. Il est l'occasion de faire une veille sur les évolutions du langage R et du logiciel RStudio et leurs interactions avec d'autres logiciels de gestion, traitement et analyse des données.
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+# Learn more about creating websites with Distill at:
+# https://rstudio.github.io/distill/website.html
+
+```
+
+<br> <br> 
+
+Le groupe State Of the R in Rennes a vu le jour en septembre 2020. Les membres du groupe se réunissent le dernier jeudi de chaque mois à [Agrocampus Ouest](https://www.agrocampus-ouest.fr/) pour des ateliers participatifs autour de l'utilisation et du suivi de l'évolution des logiciels R et RStudio.
+
+

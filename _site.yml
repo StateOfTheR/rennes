@@ -1,0 +1,13 @@
+name: "stateofther_in_rennes"
+title: "State Of The R in Rennes"
+description: |
+  State Of The R in Rennes
+base_url: https://StateoftheRRennes.github.io
+output_dir: "_site"
+navbar:
+  right:
+    - text: "Home"
+      href: index.html
+    - text: "About"
+      href: about.html
+output: distill::distill_article
