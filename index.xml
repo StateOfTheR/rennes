@@ -9,19 +9,10 @@
     <generator>Distill</generator>
     <lastBuildDate>Thu, 27 Aug 2020 00:00:00 +0000</lastBuildDate>
     <item>
-      <title>test</title>
-      <dc:creator>Nora Jones</dc:creator>
-      <link>https://StateoftheRRennes.github.io/posts/2020-08-27-test</link>
-      <description>A short description of the post.</description>
-      <guid>https://StateoftheRRennes.github.io/posts/2020-08-27-test</guid>
-      <pubDate>Thu, 27 Aug 2020 00:00:00 +0000</pubDate>
-    </item>
-    <item>
-      <title>Welcome to My Blog</title>
+      <title>Lancement du groupe State Of The R Rennais </title>
       <dc:creator>Nora Jones</dc:creator>
       <link>https://StateoftheRRennes.github.io/posts/welcome</link>
-      <description>Welcome to our new blog, My Blog. We hope you enjoy 
-reading what we have to say!</description>
+      <description>Bienvenue sur le blog du groupe Rennais de State Of The R.</description>
       <guid>https://StateoftheRRennes.github.io/posts/welcome</guid>
       <pubDate>Thu, 27 Aug 2020 00:00:00 +0000</pubDate>
     </item>
