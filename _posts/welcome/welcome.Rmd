@@ -1,8 +1,7 @@
 ---
-title: "Welcome to My Blog"
+title: "Lancement du groupe State Of The R Rennais "
 description: |
-  Welcome to our new blog, My Blog. We hope you enjoy 
-  reading what we have to say!
+  Bienvenue sur le blog du groupe Rennais de State Of The R.
 author:
   - name: Nora Jones 
     url: https://example.com/norajones
@@ -23,4 +22,7 @@ knitr::opts_chunk$set(echo = FALSE)
 ```
 
 
+Depuis 2017, le groupe [State Of The R](https://stateofther.github.io/) tient des ateliers autour de l'utilisation avancée du logiciel R à Paris. Un bootcamp a également lieu chaque année ([2020](https://stateofther.github.io/finistR2020/), [2019](https://stateofther.github.io/finistR2019/), [2018](https://stateofther.github.io/finistR2018/), [2017](https://stateofther.github.io/finistR2019/)).
+
+L'idée est née en 2020 d'organiser des ateliers mensuels à Rennes, sur le site d'Agrocampus. Ces ateliers sont participatifs et toute personne désirant s'investir est la bienvenue. La participation aux atliers vaut engagement pour proposer un atelier.
 
