@@ -9,7 +9,7 @@
     <generator>Distill</generator>
     <lastBuildDate>Mon, 28 Sep 2020 00:00:00 +0000</lastBuildDate>
     <item>
-      <title>Introduction à ggplot</title>
+      <title>Introduction à ggplot2</title>
       <dc:creator>Marie Etienne</dc:creator>
       <link>https://StateoftheRRennes.github.io/posts/2020-09-28-ggplotintoduction</link>
       <description>Première séance de State Of The R à Rennes</description>

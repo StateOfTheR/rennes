@@ -1,7 +1,7 @@
 [
   {
     "path": "posts/2020-09-28-ggplotintoduction/",
-    "title": "Introduction à ggplot",
+    "title": "Introduction à ggplot2",
     "description": "Première séance de State Of The R à Rennes",
     "author": [
       {
@@ -12,7 +12,7 @@
     "date": "2020-09-28",
     "categories": [],
     "preview": {},
-    "last_modified": "2020-09-28T14:20:59+00:00",
+    "last_modified": "2020-09-28T14:22:40+00:00",
     "input_file": {}
   },
   {
@@ -28,7 +28,7 @@
     "date": "2020-08-27",
     "categories": [],
     "preview": {},
-    "last_modified": "2020-09-28T14:20:59+00:00",
+    "last_modified": "2020-09-28T14:22:40+00:00",
     "input_file": {}
   }
 ]
