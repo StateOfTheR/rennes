@@ -6,7 +6,7 @@ base_url: https://StateoftheRRennes.github.io
 output_dir: "_site"
 collections:
   posts:
-    disqus: reproducible-finance-with-r
+    disqus: stateofther_rennes
     share: [twitter, linkedin]
     custom: _custom.html
 navbar:
