@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
+  <channel>
+    <title>State Of The R in Rennes</title>
+    <link>https://StateoftheRRennes.github.io</link>
+    <atom:link href="https://StateoftheRRennes.github.io/calendar.xml" rel="self" type="application/rss+xml"/>
+    <description>State Of The R in Rennes
+</description>
+    <generator>Distill</generator>
+    <lastBuildDate>Mon, 28 Sep 2020 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Introduction à ggplot</title>
+      <dc:creator>Marie Etienne</dc:creator>
+      <link>https://StateoftheRRennes.github.io/posts/2020-09-28-ggplotintoduction</link>
+      <description>Première séance de State Of The R à Rennes</description>
+      <guid>https://StateoftheRRennes.github.io/posts/2020-09-28-ggplotintoduction</guid>
+      <pubDate>Mon, 28 Sep 2020 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Lancement du groupe State Of The R Rennais </title>
+      <dc:creator>Marie-Pierre Etienne</dc:creator>
+      <link>https://StateoftheRRennes.github.io/posts/welcome</link>
+      <description>Bienvenue sur le blog du groupe Rennais de State Of The R.</description>
+      <guid>https://StateoftheRRennes.github.io/posts/welcome</guid>
+      <pubDate>Thu, 27 Aug 2020 00:00:00 +0000</pubDate>
+    </item>
+  </channel>
+</rss>
