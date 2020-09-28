@@ -4,6 +4,7 @@ description: |
   Première séance de State Of The R à Rennes
 author:
   - name: Marie Etienne
+    url: marietienne.github.io
 date: 09-28-2020
 output:
   distill::distill_article:
@@ -16,9 +17,9 @@ knitr::opts_chunk$set(echo = FALSE)
 
 La première séance a permis de se rencnontrer et de discuter du fonctionnement du groupe (une séance mensuelle, à priori le dernier jeudi de chaque mois sauf exception). 
 
-Cette première séance a porté sur la création de graphique avec `ggplot`. [Les slides sont disponibles](https://marieetienne.github.io/courses/Visualisation/visu_ggplot.html) et [le code](https://raw.githubusercontent.com/MarieEtienne/courses/master/Visualisation/visu_ggplot.Rmd) utilisé est également disponible. 
+Cette première séance a porté sur la création de graphique avec `ggplot`. [Les slides](https://marieetienne.github.io/courses/Visualisation/visu_ggplot.html) et [le code](https://raw.githubusercontent.com/MarieEtienne/courses/master/Visualisation/visu_ggplot.Rmd) utilisés sont disponibles sur github. 
 
-Les packages nécessairespeuvebnt être installés par les commandes suivantes :
+Les packages nécessaires peuvent être installés par les commandes suivantes :
 
 ```{r install, eval = FALSE, echo = TRUE}
 install.packages("remotes")
