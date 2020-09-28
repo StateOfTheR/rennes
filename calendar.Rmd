@@ -1,9 +1,8 @@
 ---
-title: "Dates des atelierss"
+title: "Dates des ateliers"
 site: distill::distill_website
-listing: posts
 description: |
-  Les dates des atliers passés  et à venir.
+  Les dates des ateliers passés  et à venir.
 ---
 
 ```{r setup, include=FALSE}
@@ -23,6 +22,6 @@ Le groupe State Of the R in Rennes a vu le jour en septembre 2020. Les membres d
 <!-- http://stackoverflow.com/questions/11122249/scale-iframe-css-width-100-like-an-image -->
 <div class="h_iframe">
 <!-- a transparent image is preferable -->
-<iframe src="https://calendar.google.com/calendar/embed?height=500&amp;wkst=1&amp;bgcolor=%23455a64&amp;ctz=Europe%2FParis&amp;src=ZGd1NTc1bDQxNjJrdnF0dGxjbXNxdWlnYzRAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&amp;color=%237986CB&amp;mode=AGENDA&amp;title=State%20Of%20The%20R%20%40Rennes" style="border:solid 1px #777" width="400" height="500" frameborder="0" scrolling="no"></iframe>
+<iframe src="https://calendar.google.com/calendar/embed?height=400&amp;wkst=1&amp;bgcolor=%23455a64&amp;ctz=Europe%2FParis&amp;src=ZmY3MWE2cWVlbjhhbHU5bTI0djlhNTR2MXNAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&amp;color=%23455a64" style="border:solid 1px #777" width="400" height="400" frameborder="0" scrolling="no"></iframe>
 </div>
 
