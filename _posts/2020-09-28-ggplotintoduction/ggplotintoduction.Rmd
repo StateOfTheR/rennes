@@ -1,0 +1,34 @@
+---
+title: "Introduction à Ggplot"
+description: |
+  Première séance de State Of The R à Rennes
+author:
+  - name: Marie Etienne
+date: 09-28-2020
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+La première séance a permis de se rencnontrer et de discuter du fonctionnement du groupe (une séance mensuelle, à priori le dernier jeudi de chaque mois sauf exception). 
+
+Cette première séance a porté sur la création de graphique avec `ggplot`. [Les slides sont disponibles](https://marieetienne.github.io/courses/Visualisation/visu_ggplot.html) et [le code](https://raw.githubusercontent.com/MarieEtienne/courses/master/Visualisation/visu_ggplot.Rmd) utilisé est également disponible. 
+
+Les packages nécessairespeuvebnt être installés par les commandes suivantes :
+
+```{r install, eval = FALSE}
+install.packages("remotes")
+install.packages(c("devtools","plotly","ggpubr","gifski"))
+install.packages(c("tidyverse","magick","gganimate","GGally","sf"))
+install.packages(c("wesanderson","ggmap","rnaturalearth","rnaturalearthdata","rgeos"))
+install.packages(c("kableExtra","RefManageR"))
+remotes::install_github("allisonhorst/palmerpenguins")
+remotes::install_github("yihui/xaringan")
+remotes::install_github("EvaMaeRey/flipbookr")
+remotes::install_github("ropensci/osmdata")
+```
+
