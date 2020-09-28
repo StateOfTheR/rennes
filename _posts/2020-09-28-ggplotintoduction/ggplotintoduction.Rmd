@@ -1,5 +1,5 @@
 ---
-title: "Introduction à Ggplot"
+title: "Introduction à ggplot"
 description: |
   Première séance de State Of The R à Rennes
 author:
@@ -20,7 +20,7 @@ Cette première séance a porté sur la création de graphique avec `ggplot`. [L
 
 Les packages nécessairespeuvebnt être installés par les commandes suivantes :
 
-```{r install, eval = FALSE}
+```{r install, eval = FALSE, echo = TRUE}
 install.packages("remotes")
 install.packages(c("devtools","plotly","ggpubr","gifski"))
 install.packages(c("tidyverse","magick","gganimate","GGally","sf"))
