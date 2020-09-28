@@ -1,9 +1,11 @@
 ---
-title: "About this blog"
+title: "A propos"
 description: |
-  Some additional details about the blog
+  Quelques détails
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 ```
+
+Le groupe State Of The R @Rennes est construit sur le modèle du groupe State Of The R @Paris. Il regroupe des chercheurs, doctorants, enseignants,  ingénieurs, post-doctorants utilisateurs avertis de R avec l'objectif de maintenir une cveille active autour des innovations de ce logiciel.
