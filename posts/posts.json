@@ -1,5 +1,21 @@
 [
   {
+    "path": "posts/2020-09-28-ggplotintoduction/",
+    "title": "Introduction à Ggplot",
+    "description": "Première séance de State Of The R à Rennes",
+    "author": [
+      {
+        "name": "Marie Etienne",
+        "url": {}
+      }
+    ],
+    "date": "2020-09-28",
+    "categories": [],
+    "preview": {},
+    "last_modified": "2020-09-28T11:55:20+00:00",
+    "input_file": {}
+  },
+  {
     "path": "posts/welcome/",
     "title": "Lancement du groupe State Of The R Rennais ",
     "description": "Bienvenue sur le blog du groupe Rennais de State Of The R.",
@@ -12,7 +28,7 @@
     "date": "2020-08-27",
     "categories": [],
     "preview": {},
-    "last_modified": "2020-08-28T07:22:18+00:00",
+    "last_modified": "2020-09-28T11:55:21+00:00",
     "input_file": {}
   }
 ]
