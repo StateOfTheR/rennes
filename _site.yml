@@ -4,6 +4,11 @@ description: |
   State Of The R in Rennes
 base_url: https://StateoftheRRennes.github.io
 output_dir: "_site"
+collections:
+  posts:
+    disqus: reproducible-finance-with-r
+    share: [twitter, linkedin]
+    custom: _custom.html
 navbar:
   right:
     - text: "Home"
