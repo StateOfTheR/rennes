@@ -1,5 +1,5 @@
 ---
-title: "Introduction à ggplot"
+title: "Introduction à ggplot2"
 description: |
   Première séance de State Of The R à Rennes
 author:
@@ -9,6 +9,7 @@ date: 09-28-2020
 output:
   distill::distill_article:
     self_contained: false
+tags: ["tidy", "ggplot2"]
 ---
 
 ```{r setup, include=FALSE}
