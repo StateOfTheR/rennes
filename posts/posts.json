@@ -6,13 +6,13 @@
     "author": [
       {
         "name": "Marie Etienne",
-        "url": {}
+        "url": "marietienne.github.io"
       }
     ],
     "date": "2020-09-28",
     "categories": [],
     "preview": {},
-    "last_modified": "2020-09-28T12:18:10+00:00",
+    "last_modified": "2020-09-28T13:06:52+00:00",
     "input_file": {}
   },
   {
@@ -21,14 +21,14 @@
     "description": "Bienvenue sur le blog du groupe Rennais de State Of The R.",
     "author": [
       {
-        "name": "Nora Jones",
-        "url": "https://example.com/norajones"
+        "name": "Marie-Pierre Etienne",
+        "url": "marieetienne.github.io"
       }
     ],
     "date": "2020-08-27",
     "categories": [],
     "preview": {},
-    "last_modified": "2020-09-28T12:18:10+00:00",
+    "last_modified": "2020-09-28T13:06:52+00:00",
     "input_file": {}
   }
 ]

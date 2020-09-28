@@ -1297,6 +1297,7 @@
 <div class="nav-right">
 <a href="index.html">Home</a>
 <a href="about.html">About</a>
+<a href="calendar.html">Dates</a>
 <a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
 </div>
 </nav>
@@ -1621,7 +1622,7 @@ function init_posts_list() {
 
 
 
-<div class="posts-container posts-apply-limit l-page">
+<div class="posts-container posts-with-sidebar posts-apply-limit l-screen-inset">
 <div class="posts-list">
 <h1 class="posts-list-caption">State Of The R in Rennes</h1>
 <a href="posts/2020-09-28-ggplotintoduction/" class="post-preview">
@@ -1651,6 +1652,22 @@ function init_posts_list() {
 </div>
 </a>
 </div>
+<div class="posts-sidebar">
+<div><div class="sidebar-section custom">
+  <h3>About</h3>
+  Ce blog rassemble les activités du groupe State Of The <a href="https://www.r-project.org/">R</a> à Rennes
+</div>
+
+<div class="sidebar-section custom">
+  <h3>Search</h3>
+  <form action="https://duckduckgo.com/">
+    <input type="text" name="q" placeholder="Search...">
+    <input type="hidden" name="sites" 
+      value="https://marieetienne.github.io/stateoftheRinRennes/"> <!-- Replace with your blog URL -->
+    <!--<button type="submit">Search</button>-->
+  </form>
+</div></div>
+</div>
 <div class="posts-more">
 <a href="#">More articles &raquo;</a>
 </div>
@@ -1667,13 +1684,13 @@ function init_posts_list() {
 <p><br> <br></p>
 <p>Le groupe State Of the R in Rennes a vu le jour en septembre 2020. Les membres du groupe se réunissent le dernier jeudi de chaque mois à <a href="https://www.agrocampus-ouest.fr/">Agrocampus Ouest</a> pour des ateliers participatifs autour de l’utilisation et du suivi de l’évolution des logiciels R et RStudio.</p>
 <p><br> <br></p>
-<h2>
+<h3>
 les dates des ateliers
-</h2>
+</h3>
 <!-- http://stackoverflow.com/questions/11122249/scale-iframe-css-width-100-like-an-image -->
 <div class="h_iframe">
 <!-- a transparent image is preferable -->
-<iframe src="https://calendar.google.com/calendar/embed?height=600&amp;wkst=1&amp;bgcolor=%23ffffff&amp;ctz=Europe%2FParis&amp;src=ZGd1NTc1bDQxNjJrdnF0dGxjbXNxdWlnYzRAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&amp;color=%237986CB&amp;mode=AGENDA&amp;title=State%20Of%20The%20R%20%40Rennes" style="border:solid 1px #777" width="600" height="400" frameborder="0" scrolling="no">
+<iframe src="https://calendar.google.com/calendar/embed?height=600&amp;wkst=1&amp;bgcolor=%23ffffff&amp;ctz=Europe%2FParis&amp;src=ZGd1NTc1bDQxNjJrdnF0dGxjbXNxdWlnYzRAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&amp;color=%237986CB&amp;mode=AGENDA&amp;title=State%20Of%20The%20R%20%40Rennes" style="border:solid 1px #777" width="400" height="300" frameborder="0" scrolling="no">
 </iframe>
 </div>
 <!--radix_placeholder_article_footer-->
