@@ -1,9 +1,8 @@
 ---
-title: "Dates des atelierss"
+title: "Dates des ateliers"
 site: distill::distill_website
-listing: posts
 description: |
-  Les dates des atliers passés  et à venir.
+  Les dates des ateliers passés  et à venir.
 ---
 
 ```{r setup, include=FALSE}
