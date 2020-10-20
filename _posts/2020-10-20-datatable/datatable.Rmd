@@ -1,0 +1,14 @@
+---
+title: "data.table pour une manipulation de données efficace"
+description: |
+  exploration des possibilités du package data.table
+author:
+  - name: Marie Etienne
+date: 10-20-2020
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+
+Le 22 octobre [Pierre-André Cornillon](https://perso.univ-rennes2.fr/pierre-andre.cornillon) présentera les fonctionnalités du package data.table qui promet une manipulation efficace des données.   
