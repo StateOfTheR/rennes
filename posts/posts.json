@@ -1,5 +1,21 @@
 [
   {
+    "path": "posts/2020-10-20-datatable/",
+    "title": "data.table pour une manipulation de données efficace",
+    "description": "exploration des possibilités du package data.table",
+    "author": [
+      {
+        "name": "Marie Etienne",
+        "url": {}
+      }
+    ],
+    "date": "2020-10-20",
+    "categories": [],
+    "preview": {},
+    "last_modified": "2020-10-20T09:39:01+00:00",
+    "input_file": {}
+  },
+  {
     "path": "posts/2020-09-28-ggplotintoduction/",
     "title": "Introduction à ggplot2",
     "description": "Première séance de State Of The R à Rennes",
@@ -12,7 +28,7 @@
     "date": "2020-09-28",
     "categories": [],
     "preview": {},
-    "last_modified": "2020-09-28T14:34:08+00:00",
+    "last_modified": "2020-10-20T09:39:00+00:00",
     "input_file": {}
   },
   {
@@ -28,7 +44,7 @@
     "date": "2020-08-27",
     "categories": [],
     "preview": {},
-    "last_modified": "2020-09-28T14:34:08+00:00",
+    "last_modified": "2020-10-20T09:39:01+00:00",
     "input_file": {}
   }
 ]
