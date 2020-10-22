@@ -11,8 +11,9 @@
     ],
     "date": "2020-10-20",
     "categories": [],
+    "contents": "\nLe 22 octobre Pierre-André Cornillon nous a présenté les fonctionnalités du package data.table qui promet une manipulation efficace des données.\nLa présentation est disponible, ainsi que la feuille d’exercices qu’il a préparée. Le jeu de données LTER.csv est utilisé pour le TD.\n\n\n\n",
     "preview": {},
-    "last_modified": "2020-10-20T09:39:01+00:00",
+    "last_modified": "2020-10-22T15:52:45+00:00",
     "input_file": {}
   },
   {
@@ -27,8 +28,9 @@
     ],
     "date": "2020-09-28",
     "categories": [],
+    "contents": "\nLa première séance a permis de se rencnontrer et de discuter du fonctionnement du groupe (une séance mensuelle, à priori le dernier jeudi de chaque mois sauf exception).\nCette première séance a porté sur la création de graphique avec ggplot. Les slides et le code utilisés sont disponibles sur github.\nLes packages nécessaires peuvent être installés par les commandes suivantes :\n\n\ninstall.packages(\"remotes\")\ninstall.packages(c(\"devtools\",\"plotly\",\"ggpubr\",\"gifski\"))\ninstall.packages(c(\"tidyverse\",\"magick\",\"gganimate\",\"GGally\",\"sf\"))\ninstall.packages(c(\"wesanderson\",\"ggmap\",\"rnaturalearth\",\"rnaturalearthdata\",\"rgeos\"))\ninstall.packages(c(\"kableExtra\",\"RefManageR\"))\nremotes::install_github(\"allisonhorst/palmerpenguins\")\nremotes::install_github(\"yihui/xaringan\")\nremotes::install_github(\"EvaMaeRey/flipbookr\")\nremotes::install_github(\"ropensci/osmdata\")\n\n\n\n\n\n\n",
     "preview": {},
-    "last_modified": "2020-10-20T09:39:00+00:00",
+    "last_modified": "2020-10-22T15:52:45+00:00",
     "input_file": {}
   },
   {
@@ -43,8 +45,9 @@
     ],
     "date": "2020-08-27",
     "categories": [],
+    "contents": "\nDepuis 2017, le groupe State Of The R tient des ateliers autour de l’utilisation avancée du logiciel R à Paris. Un bootcamp a également lieu chaque année (2020, 2019, 2018, 2017).\nL’idée est née en 2020 d’organiser des ateliers mensuels à Rennes, sur le site d’Agrocampus. Ces ateliers sont participatifs et toute personne désirant s’investir est la bienvenue. La participation aux atliers vaut engagement pour proposer un atelier.\n\n\n\n",
     "preview": {},
-    "last_modified": "2020-10-20T09:39:01+00:00",
+    "last_modified": "2020-10-22T15:52:46+00:00",
     "input_file": {}
   }
 ]
