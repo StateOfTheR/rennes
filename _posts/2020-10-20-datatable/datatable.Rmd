@@ -13,4 +13,4 @@ output:
 
 Le 22 octobre [Pierre-André Cornillon](https://perso.univ-rennes2.fr/pierre-andre.cornillon) nous a présenté  les fonctionnalités du package data.table qui promet une manipulation efficace des données.   
 
-La présentation est [disponible](../../presentation/2020_10_pres_dt.pdf), ainsi que la [feuille d'exercices](../../presentation/2020_10_td_dt.pdf) qu'il a préparée.
+La présentation est [disponible](../../presentation/2020_10_pres_dt.pdf), ainsi que la [feuille d'exercices](../../presentation/2020_10_td_dt.pdf) qu'il a préparée. Le jeu de données [LTER.csv](../../data/LTER.csv) est utilisé pour le TD.
