@@ -1,0 +1,330 @@
+---
+title: "Tidyverse"
+author: "Marchand Jean-Louis"
+date: "07/01/2021"
+output: beamer_presentation
+theme: "metropolis"
+header-includes:
+- \usepackage{booktabs}
+- \usepackage{longtable}
+- \usepackage{array}
+- \usepackage{multirow}
+- \usepackage{wrapfig}
+- \usepackage{float}
+- \usepackage{colortbl}
+- \usepackage{pdflscape}
+- \usepackage{tabu}
+- \usepackage{threeparttable}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, size = "tiny", prompt = T)
+opts <- options(knitr.kable.NA = "")
+```
+## Lien vers la vidéo
+
+Pour celles et ceux qui voudraient voir ou revoir la séance du jeudi 7 janvier 2021, voici le lien vers l'enregistrement :
+
+https://bbb-rc.agrocampus-ouest.fr/playback/presentation/2.0/playback.html?meetingId=bf789842969ba8bc2f1a95c8d2e81c408316390e-1610024143121
+
+## Description approximative
+
+Le paquet **tidyverse** est un regroupement de plusieurs paquets (cf https://www.tidyverse.org/ pour des descriptions et surtout les **cheatsheets**). Grossièrement :
+
+- **tibble** pour la structure des données (nouveau format différent d'un data.frame ou .table)
+- **dplyr** pour la manipulation et l'analyse proprement dite
+- **forcats** pour des fonctionnalités propres aux facteurs
+- **tidyr** pour la préparation des données (pivots et autres)
+- **lubridate** pour la gestion des dates
+- **stringr** pour la gestion des chaînes de caractères
+- *readr* pour l'importation (format tibble en sortie)
+- *ggplot2* pour la visualisation
+- *purrr* pour la programmation
+- ...
+
+## Chargement des paquets
+\scriptsize
+```{r tidyverse}
+library(tidyverse)
+library(lubridate)
+library(kableExtra)
+```
+
+## Début de discussion
+
+- boîte à outils standard
+- lisibilité du code (/base)
+- prise en main plus naturelle ? (format par défaut dans RStudio)
+- comme toujours : coût d'entrée
+- plus orienté utilisateur que performance (/data.table)
+
+Présentation basée sur une lecture du tutoriel 
+
+https://juba.github.io/tidyverse/
+
+ainsi que 
+
+https://haozhu233.github.io/kableExtra/awesome_table_in_html.html
+
+## Les tibbles
+\tiny
+```{r}
+library(palmerpenguins)
+data(package = 'palmerpenguins')
+penguins
+```
+## Premières manipulations
+\tiny
+```{r}
+glimpse(penguins)
+```
+## Changement de structure
+\tiny
+```{r}
+penguins.df <- as.data.frame(penguins)
+str(penguins.df)
+penguins.df <- as_tibble(penguins.df)
+str(penguins.df)
+```
+
+## Remarque sur les colonnes
+\tiny
+```{r}
+str(penguins$species)
+str(penguins[,1])
+str(penguins[[1]])
+str(simplify(penguins[,1]))
+``` 
+
+## Les fonctions dplyr : rename
+Changement des noms de variable
+\scriptsize
+```{r}
+penguins <- rename(penguins, bill_l = bill_length_mm, 
+                 bill_d = bill_depth_mm,
+                 flip_l = flipper_length_mm,
+                 mass = body_mass_g)
+glimpse(penguins)
+```
+
+
+
+
+## Les fonctions dplyr : slice
+Sélection de lignes/individus par leur position
+\scriptsize
+```{r}
+slice(penguins, 123)
+slice(penguins, 3:6)
+```
+## Les fonctions dplyr : filter
+Sélection de lignes/individus par condition(s)
+\scriptsize
+```{r}
+filter(penguins, (species != "Adelie")&(bill_l >= 39))
+```
+
+## Les fonctions dplyr : select
+Sélection de colonnes par nom ou condition
+\scriptsize
+```{r}
+select(penguins, species, bill_l)
+```
+
+```{r, eval=F}
+select(penguins, species:bill_l)
+select(penguins, starts_with("bill")) 
+select(penguins, ends_with("_l")) ## aussi contains() et matches()
+select_if(penguins, is.numeric) ## par booléen
+
+```
+
+## Les fonctions dplyr : arrange
+Tri des observations suivant des valeurs des variables
+\scriptsize
+```{r}
+arrange(penguins,bill_d, desc(bill_l))
+```
+
+
+
+## Les fonctions dplyr : mutate
+Création d'une nouvelle variable
+\scriptsize
+```{r}
+mutate(penguins, bill_length_cm = bill_l/10)
+```
+
+
+## Composition de fonctions : pipeline
+Composition de gauche à droite pour plus de lisibilité !  
+\scriptsize
+```{r}
+slice( arrange( select_if ( filter (penguins,  island == "Biscoe" ), 
+                            is.numeric ), mass) , 1:3)
+penguins %>% filter( island == "Biscoe" ) %>% 
+             select_if ( is.numeric ) %>% 
+             arrange( mass ) %>% 
+             slice(1:3)
+```
+
+## Les fonctions dplyr : group_by
+Regroupement des indvidus 
+\scriptsize
+```{r}
+penguins %>% group_by(island) %>% 
+             slice(1:2)
+```
+
+## Les fonctions dplyr : summarise
+Descriptions des données par sous-groupes
+\scriptsize
+```{r}
+penguins %>% group_by(island) %>% 
+             summarise(long_moy = mean(bill_l, na.rm=T),
+                       long_max = max(bill_l, na.rm = T),
+                       nb = n())
+```
+
+## Les fonctions dplyr : count
+Autre façon de compter
+\scriptsize
+```{r}
+penguins %>% count(island, species) %>%
+             arrange(desc(n))
+```
+Cela revient quasiment au même que
+```{r, eval=FALSE}
+penguins %>% group_by(island, species) %>%
+             summarise(n=n()) %>% 
+             arrange(desc(n))
+
+```
+
+## Descriptions
+
+Grouper/Dégrouper
+\scriptsize
+```{r}
+penguins %>% group_by(island, species) %>% 
+             summarise(nb = n()) %>% 
+             ungroup() %>% 
+             mutate(pourcentage = nb / sum(nb) * 100)
+```
+
+## Descriptions
+Descriptions conditionnelles
+\scriptsize
+```{r}
+penguins %>% group_by(island, species) %>% 
+             summarise_if(is.numeric,mean, na.rm = T)
+```
+
+## Descriptions
+Descriptions de plusieurs variables
+\scriptsize
+```{r}
+penguins %>% summarise_at(vars(bill_l:flip_l),
+                          list(~ mean(., na.rm = TRUE), 
+                               ~ median(., na.rm = TRUE)))
+```
+Autres façons
+```{r, eval=F}
+penguins %>% summarise_at(vars(3:5),
+                          list(~ mean(., na.rm = TRUE),
+                               ~ median(., na.rm = TRUE)))
+penguins %>% summarise_at(vars(bill_l,bill_d,flip_l),
+                          list(~ mean(., na.rm = TRUE), 
+                               ~ median(., na.rm = TRUE)))
+```
+
+## Manipulations des facteurs : deux exemples
+Changement des niveaux d'un facteur donné
+
+\scriptsize
+```{r}
+penguins %>% 
+  mutate( species = fct_recode( species, "Delo" = "Adelie" )) %>%
+  select(1:3)
+ 
+          
+```
+
+## Manipulations des facteurs : deux exemples
+Changement de niveaux sur tous les facteurs
+
+\scriptsize
+```{r}
+pingoo <- penguins %>% mutate_if( is.factor, fct_recode,
+                                    "Delo" = "Adelie", 
+                                    "Delo" = "Dream") 
+```
+
+## Manipulations des facteurs : deux exemples
+Changement des niveaux d'un facteur
+
+\scriptsize
+```{r}
+pingoo %>% select_if(is.factor) %>% 
+           str()
+```
+## Transformations des données : un exemple
+Pivots
+\scriptsize
+```{r}
+pays <- c("Belgique", "France")
+pop1992 <- c(10045622,	57374179) 
+pop1997 <- c(10199787,	58623428)
+d <- tibble(pays, pop1992, pop1997)
+d %>% pivot_longer(c("pop1992","pop1997"))
+```
+
+
+## Manipulations des chaînes de caractères : un exemple
+Concaténation et séparations simples
+\scriptsize
+```{r}
+d <- penguins %>% unite(new , island, species)
+d %>% slice(1:3)
+d %>% separate(new, c("ile", "espece")) %>% slice(1:3)
+```
+
+
+## Manipulations des dates  : un exemple
+Transcription facile
+\scriptsize
+```{r}
+ymd(20101215)
+ymd(101215)
+mdy("4/1/17")
+mdy("4-1-17")
+mdy("04-1-2017")
+```
+
+
+
+## Mise en forme de tableaux : un exemple
+\scriptsize
+```{r}
+anvmod1 <- anova( lm(data= penguins, flip_l ~ .) )
+anvmod1 <- as_tibble(cbind(Effect = row.names(anvmod1),anvmod1))
+anvmod1 %>% mutate_if(is.numeric, list(~as.character(signif(., 3)))) %>% 
+  kbl() %>% 
+  kable_paper(full_width = F) %>% 
+  column_spec(1,  background = 'cyan') %>% 
+  row_spec(which.max(anvmod1$`Pr(>F)`), color  = 'white',
+           background = 'teal') %>% 
+  column_spec(4, color  = spec_color(anvmod1$`Mean Sq`))
+```
+
+
+## Cheat sheets
+\scriptsize
+- **readr** https://raw.githubusercontent.com/rstudio/cheatsheets/master/pngs/thumbnails/data-import-cheatsheet-thumbs.png
+- **tidyr** https://raw.githubusercontent.com/rstudio/cheatsheets/master/pngs/thumbnails/data-import-cheatsheet-thumbs.png
+- **stringr** https://raw.githubusercontent.com/rstudio/cheatsheets/master/pngs/thumbnails/strings-cheatsheet-thumbs.png
+- **forcats** https://raw.githubusercontent.com/rstudio/cheatsheets/master/pngs/thumbnails/forcats-cheatsheet-thumbs.png
+- **dplyr** https://raw.githubusercontent.com/rstudio/cheatsheets/master/pngs/thumbnails/data-transformation-cheatsheet-thumbs.png
+- **ggplot2** https://raw.githubusercontent.com/rstudio/cheatsheets/master/pngs/thumbnails/data-visualization-cheatsheet-thumbs.png
+- **purrr** https://raw.githubusercontent.com/rstudio/cheatsheets/master/pngs/thumbnails/purrr-cheatsheet-thumbs.png
+- **lubridate** https://raw.githubusercontent.com/rstudio/cheatsheets/master/pngs/thumbnails/lubridate-cheatsheet-thumbs.png

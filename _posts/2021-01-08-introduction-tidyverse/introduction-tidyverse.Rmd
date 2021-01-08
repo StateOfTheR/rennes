@@ -1,0 +1,20 @@
+---
+title: "Introduction tidyverse"
+description: |
+  A short description of the post.
+author:
+  - name: Marie Etienne
+date: 01-08-2021
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+Le 7 janvier 2021 Jean-Louis Marchand nous a proposé une introduction au tidyverse pour un code lisible et reproductible.   
+
+La présentation est [disponible](../../presentation/2021_01_07_tidyverse.pdf) ainsi que le fichier [Markkdown correspondant](../../presentation/2021_01_07_tidyverse.Rmd).
