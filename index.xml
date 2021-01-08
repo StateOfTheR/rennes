@@ -7,7 +7,15 @@
     <description>State Of The R in Rennes
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>Tue, 20 Oct 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 08 Jan 2021 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Introduction tidyverse</title>
+      <dc:creator>Marie Etienne</dc:creator>
+      <link>https://StateoftheRRennes.github.io/posts/2021-01-08-introduction-tidyverse</link>
+      <description>A short description of the post.</description>
+      <guid>https://StateoftheRRennes.github.io/posts/2021-01-08-introduction-tidyverse</guid>
+      <pubDate>Fri, 08 Jan 2021 00:00:00 +0000</pubDate>
+    </item>
     <item>
       <title>data.table pour une manipulation de données efficace</title>
       <dc:creator>Marie Etienne</dc:creator>
