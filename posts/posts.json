@@ -2,7 +2,7 @@
   {
     "path": "posts/2021-01-08-introduction-tidyverse/",
     "title": "Introduction tidyverse",
-    "description": "A short description of the post.",
+    "description": "A la découverte du tidyverse",
     "author": [
       {
         "name": "Marie Etienne",
@@ -13,7 +13,7 @@
     "categories": [],
     "contents": "\nLe 7 janvier 2021 Jean-Louis Marchand nous a proposé une introduction au tidyverse pour un code lisible et reproductible.\nLa présentation est disponible ainsi que le fichier Markkdown correspondant.\n\n\n\n",
     "preview": {},
-    "last_modified": "2021-01-08T13:22:34+00:00",
+    "last_modified": "2021-01-08T13:31:55+00:00",
     "input_file": {}
   },
   {
@@ -30,7 +30,7 @@
     "categories": [],
     "contents": "\nLe 22 octobre Pierre-André Cornillon nous a présenté les fonctionnalités du package data.table qui promet une manipulation efficace des données.\nLa présentation est disponible, ainsi que la feuille d’exercices qu’il a préparée. Le jeu de données LTER.csv est utilisé pour le TD.\n\n\n\n",
     "preview": {},
-    "last_modified": "2021-01-08T13:22:34+00:00",
+    "last_modified": "2021-01-08T13:31:55+00:00",
     "input_file": {}
   },
   {
@@ -47,7 +47,7 @@
     "categories": [],
     "contents": "\nLa première séance a permis de se rencnontrer et de discuter du fonctionnement du groupe (une séance mensuelle, à priori le dernier jeudi de chaque mois sauf exception).\nCette première séance a porté sur la création de graphique avec ggplot. Les slides et le code utilisés sont disponibles sur github.\nLes packages nécessaires peuvent être installés par les commandes suivantes :\n\n\ninstall.packages(\"remotes\")\ninstall.packages(c(\"devtools\",\"plotly\",\"ggpubr\",\"gifski\"))\ninstall.packages(c(\"tidyverse\",\"magick\",\"gganimate\",\"GGally\",\"sf\"))\ninstall.packages(c(\"wesanderson\",\"ggmap\",\"rnaturalearth\",\"rnaturalearthdata\",\"rgeos\"))\ninstall.packages(c(\"kableExtra\",\"RefManageR\"))\nremotes::install_github(\"allisonhorst/palmerpenguins\")\nremotes::install_github(\"yihui/xaringan\")\nremotes::install_github(\"EvaMaeRey/flipbookr\")\nremotes::install_github(\"ropensci/osmdata\")\n\n\n\n\n\n\n",
     "preview": {},
-    "last_modified": "2021-01-08T13:22:33+00:00",
+    "last_modified": "2021-01-08T13:31:54+00:00",
     "input_file": {}
   },
   {
@@ -64,7 +64,7 @@
     "categories": [],
     "contents": "\nDepuis 2017, le groupe State Of The R tient des ateliers autour de l’utilisation avancée du logiciel R à Paris. Un bootcamp a également lieu chaque année (2020, 2019, 2018, 2017).\nL’idée est née en 2020 d’organiser des ateliers mensuels à Rennes, sur le site d’Agrocampus. Ces ateliers sont participatifs et toute personne désirant s’investir est la bienvenue. La participation aux atliers vaut engagement pour proposer un atelier.\n\n\n\n",
     "preview": {},
-    "last_modified": "2021-01-08T13:22:35+00:00",
+    "last_modified": "2021-01-08T13:31:56+00:00",
     "input_file": {}
   }
 ]
