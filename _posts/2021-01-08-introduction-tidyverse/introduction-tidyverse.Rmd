@@ -1,7 +1,7 @@
 ---
 title: "Introduction tidyverse"
 description: |
-  A short description of the post.
+  A la découverte du tidyverse
 author:
   - name: Marie Etienne
 date: 01-08-2021
