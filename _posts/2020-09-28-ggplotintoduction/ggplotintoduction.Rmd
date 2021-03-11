@@ -23,14 +23,10 @@ Cette première séance a porté sur la création de graphique avec `ggplot`. [L
 Les packages nécessaires peuvent être installés par les commandes suivantes :
 
 ```{r install, eval = FALSE, echo = TRUE}
-install.packages("remotes")
-install.packages(c("devtools","plotly","ggpubr","gifski"))
-install.packages(c("tidyverse","magick","gganimate","GGally","sf"))
+#install.packages("remotes")
+#install.packages(c("devtools","plotly","ggpubr","gifski"))
+install.packages(c("magick","gganimate","GGally"))
 install.packages(c("wesanderson","ggmap","rnaturalearth","rnaturalearthdata","rgeos"))
-install.packages(c("kableExtra","RefManageR"))
-remotes::install_github("allisonhorst/palmerpenguins")
-remotes::install_github("yihui/xaringan")
-remotes::install_github("EvaMaeRey/flipbookr")
 remotes::install_github("ropensci/osmdata")
 ```
 
