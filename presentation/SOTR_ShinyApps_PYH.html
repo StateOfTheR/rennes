@@ -266,7 +266,7 @@ slide:not(.current) .plotly.html-widget{
 <li>le <strong>&ldquo;SERVER&rdquo;</strong> - fonction régissant ce qui se passe derrière</li>
 </ul>
 
-</article></slide><slide class=""><hgroup><h2>Architecture d’une application Shiny</h2></hgroup><article  id="architecture-dune-application-shiny-1" class="smaller">
+</article></slide><slide class=""><hgroup><h2>Architecture d’une application Shiny</h2></hgroup><article  class="smaller" id="architecture-dune-application-shiny-1">
 
 <pre class = 'prettyprint lang-r'>shinyApp(
 
@@ -290,7 +290,7 @@ slide:not(.current) .plotly.html-widget{
   
 )</pre>
 
-</article></slide><slide class=""><hgroup><h2>Architecture d’une application Shiny</h2></hgroup><article  id="architecture-dune-application-shiny-2" class="smaller">
+</article></slide><slide class=""><hgroup><h2>Architecture d’une application Shiny</h2></hgroup><article  class="smaller" id="architecture-dune-application-shiny-2">
 
 <p>Plus pratique pour les grosses applications :</p>
 
@@ -314,13 +314,13 @@ slide:not(.current) .plotly.html-widget{
 server&lt;- function(input, output) {}
 shinyApp(ui, server)</pre>
 
-</article></slide><slide class=""><hgroup><h2>Architecture d’une application Shiny</h2></hgroup><article  id="architecture-dune-application-shiny-3" class="smaller">
+</article></slide><slide class=""><hgroup><h2>Architecture d’une application Shiny</h2></hgroup><article  class="smaller" id="architecture-dune-application-shiny-3">
 
 <p>Un aperçu de ce que ça donne :</p>
 
-<p><iframe data-deferred-src="appe4dab3837355ce797b2d0585b36c978f/?w=&amp;__subapp__=1" width="100%" height="400" class="shiny-frame shiny-frame-deferred"></iframe></p>
+<p><iframe data-deferred-src="app1fd2c336b2e26b77786e8b81543d3048/?w=&amp;__subapp__=1" width="100%" height="400" class="shiny-frame shiny-frame-deferred"></iframe></p>
 
-</article></slide><slide class=""><hgroup><h2>Parce qu’on est tous un petit peu ornithologues</h2></hgroup><article  id="parce-quon-est-tous-un-petit-peu-ornithologues" class="smaller">
+</article></slide><slide class=""><hgroup><h2>Parce qu’on est tous un petit peu ornithologues</h2></hgroup><article  class="smaller" id="parce-quon-est-tous-un-petit-peu-ornithologues">
 
 <pre class = 'prettyprint lang-r'>#remotes::install_github(&quot;allisonhorst/palmerpenguins&quot;)
 data(penguins,package = &quot;palmerpenguins&quot;)
@@ -336,7 +336,7 @@ penguins %&gt;%
 ## 2 Adelie  Torgersen   39.5   17.4    186  3800 female  2007
 ## # … with 342 more rows</pre>
 
-</article></slide><slide class=""><hgroup><h2>Parce qu’on est tous un petit peu ornithologues</h2></hgroup><article  id="parce-quon-est-tous-un-petit-peu-ornithologues-1" class="smaller">
+</article></slide><slide class=""><hgroup><h2>Parce qu’on est tous un petit peu ornithologues</h2></hgroup><article  class="smaller" id="parce-quon-est-tous-un-petit-peu-ornithologues-1">
 
 <p>Tronche de pingouin :</p>
 
@@ -357,7 +357,7 @@ penguins %&gt;%
 ##  Max.   :231.0   Max.   :6300                Max.   :2009  
 ##  NA&#39;s   :2       NA&#39;s   :2</pre>
 
-</article></slide><slide class=""><hgroup><h2>Parce qu’on est tous un petit peu ornithologues</h2></hgroup><article  id="parce-quon-est-tous-un-petit-peu-ornithologues-2" class="smaller">
+</article></slide><slide class=""><hgroup><h2>Parce qu’on est tous un petit peu ornithologues</h2></hgroup><article  class="smaller" id="parce-quon-est-tous-un-petit-peu-ornithologues-2">
 
 <p>Exemple de graph à partir duquel vous travaillerez:</p>
 
@@ -374,15 +374,15 @@ penguins %&gt;%
 <li>Niv.4 = réactivité et feedback <strong>&ldquo;SERVER&rdquo;</strong> –&gt; <strong>&ldquo;UI&rdquo;</strong></li>
 </ul>
 
-</article></slide><slide class=""><hgroup><h2>Représenter graphiquement notre donnée</h2></hgroup><article  id="représenter-graphiquement-notre-donnée" class="smaller">
+</article></slide><slide class=""><hgroup><h2>Représenter graphiquement notre donnée</h2></hgroup><article  class="smaller" id="représenter-graphiquement-notre-donnée">
 
-<p><iframe data-deferred-src="appad11889d0793166717515672f259d435/?w=&amp;__subapp__=1" width="100%" height="400" class="shiny-frame shiny-frame-deferred"></iframe></p>
+<p><iframe data-deferred-src="app4ae1d56f5bb5a40358bb3344be35ed1b/?w=&amp;__subapp__=1" width="100%" height="400" class="shiny-frame shiny-frame-deferred"></iframe></p>
 
 </article></slide><slide class=""><hgroup><h2>Représenter graphiquement notre donnée</h2></hgroup><article  id="représenter-graphiquement-notre-donnée-1">
 
 <p>Comment a-t-on fait ?</p>
 
-</article></slide><slide class=""><hgroup><h2>Représenter graphiquement notre donnée</h2></hgroup><article  id="représenter-graphiquement-notre-donnée-2" class="smaller">
+</article></slide><slide class=""><hgroup><h2>Représenter graphiquement notre donnée</h2></hgroup><article  class="smaller" id="représenter-graphiquement-notre-donnée-2">
 
 <pre class = 'prettyprint lang-r'>ui &lt;- fluidPage(
   titlePanel(&quot;Ma Donnée de Piafs&quot;),
@@ -410,7 +410,7 @@ server&lt;- function(input, output) {
 
 shinyApp(ui, server)</pre>
 
-</article></slide><slide class=""><hgroup><h2>Représenter graphiquement notre donnée</h2></hgroup><article  id="représenter-graphiquement-notre-donnée-3" class="smaller">
+</article></slide><slide class=""><hgroup><h2>Représenter graphiquement notre donnée</h2></hgroup><article  class="smaller" id="représenter-graphiquement-notre-donnée-3">
 
 <p>Comment a-t-on fait ?</p>
 
@@ -427,7 +427,7 @@ shinyApp(ui, server)</pre>
         theme_light()
       })</pre>
 
-</article></slide><slide class=""><hgroup><h2>Représenter graphiquement notre donnée</h2></hgroup><article  id="représenter-graphiquement-notre-donnée-4" class="smaller">
+</article></slide><slide class=""><hgroup><h2>Représenter graphiquement notre donnée</h2></hgroup><article  class="smaller" id="représenter-graphiquement-notre-donnée-4">
 
 <p>Comment a-t-on fait ?</p>
 
@@ -441,7 +441,7 @@ shinyApp(ui, server)</pre>
         plotOutput(&quot;pengPlot&quot;)
     )</pre>
 
-</article></slide><slide class=""><hgroup><h2>Représenter graphiquement notre donnée</h2></hgroup><article  id="représenter-graphiquement-notre-donnée-5" class="smaller">
+</article></slide><slide class=""><hgroup><h2>Représenter graphiquement notre donnée</h2></hgroup><article  class="smaller" id="représenter-graphiquement-notre-donnée-5">
 
 <p>Comment a-t-on fait ?</p>
 
@@ -535,9 +535,9 @@ plotOutput()</pre>
 <pre class = 'prettyprint lang-r'>renderPlotly()
 plotlyOutput()</pre>
 
-</article></slide><slide class=""><hgroup><h2>Au passage, un outil sympa : Plotly</h2></hgroup><article  id="au-passage-un-outil-sympa-plotly-1" class="smaller">
+</article></slide><slide class=""><hgroup><h2>Au passage, un outil sympa : Plotly</h2></hgroup><article  class="smaller" id="au-passage-un-outil-sympa-plotly-1">
 
-<p><iframe data-deferred-src="appd60efbdf6d30e793e529202355764ab7/?w=&amp;__subapp__=1" width="100%" height="400" class="shiny-frame shiny-frame-deferred"></iframe></p>
+<p><iframe data-deferred-src="appbf2ba213ba3c4d7045cff7486194e61b/?w=&amp;__subapp__=1" width="100%" height="400" class="shiny-frame shiny-frame-deferred"></iframe></p>
 
 </article></slide><slide class=""><hgroup><h2>Interactivité : comment ?</h2></hgroup><article  id="interactivité-comment">
 
@@ -578,9 +578,9 @@ plotlyOutput()</pre>
 
 </article></slide><slide class=""><hgroup><h2>Pratique Niv1 : selectInput - ce qu’on veut</h2></hgroup><article  id="pratique-niv1-selectinput---ce-quon-veut">
 
-<p><iframe data-deferred-src="app263db99be4371bbe276b5155743e9e40/?w=&amp;__subapp__=1" width="100%" height="400" class="shiny-frame shiny-frame-deferred"></iframe></p>
+<p><iframe data-deferred-src="app10be479f9ea8a244699ae4b689ab57f9/?w=&amp;__subapp__=1" width="100%" height="400" class="shiny-frame shiny-frame-deferred"></iframe></p>
 
-</article></slide><slide class=""><hgroup><h2>Pratique Niv1 : SelectInput - ce qu’il fallait faire</h2></hgroup><article  id="pratique-niv1-selectinput---ce-quil-fallait-faire" class="smaller">
+</article></slide><slide class=""><hgroup><h2>Pratique Niv1 : SelectInput - ce qu’il fallait faire</h2></hgroup><article  class="smaller" id="pratique-niv1-selectinput---ce-quil-fallait-faire">
 
 <pre class = 'prettyprint lang-r'>ui &lt;- fluidPage(
 ...
@@ -594,7 +594,7 @@ plotlyOutput()</pre>
   )
 )</pre>
 
-</article></slide><slide class=""><hgroup><h2>Pratique Niv1 : SelectInput - ce qu’il fallait faire</h2></hgroup><article  id="pratique-niv1-selectinput---ce-quil-fallait-faire-1" class="smaller">
+</article></slide><slide class=""><hgroup><h2>Pratique Niv1 : SelectInput - ce qu’il fallait faire</h2></hgroup><article  class="smaller" id="pratique-niv1-selectinput---ce-quil-fallait-faire-1">
 
 <pre class = 'prettyprint lang-r'>...
 server&lt;- function(input, output) {
@@ -620,9 +620,9 @@ server&lt;- function(input, output) {
 
 </article></slide><slide class=""><hgroup><h2>Pratique Niv1 : sliderInput - ce qu’on veut</h2></hgroup><article  id="pratique-niv1-sliderinput---ce-quon-veut">
 
-<p><iframe data-deferred-src="app17f42c8b77ce1cf969cfc25a64ccdc7b/?w=&amp;__subapp__=1" width="100%" height="400" class="shiny-frame shiny-frame-deferred"></iframe></p>
+<p><iframe data-deferred-src="app376e9fbfe7ffb619619084c11e85a471/?w=&amp;__subapp__=1" width="100%" height="400" class="shiny-frame shiny-frame-deferred"></iframe></p>
 
-</article></slide><slide class=""><hgroup><h2>Pratique Niv1 : sliderInput - ce qu’il fallait faire</h2></hgroup><article  id="pratique-niv1-sliderinput---ce-quil-fallait-faire" class="smaller">
+</article></slide><slide class=""><hgroup><h2>Pratique Niv1 : sliderInput - ce qu’il fallait faire</h2></hgroup><article  class="smaller" id="pratique-niv1-sliderinput---ce-quil-fallait-faire">
 
 <pre class = 'prettyprint lang-r'>ui &lt;- fluidPage(
 ...
@@ -633,7 +633,7 @@ server&lt;- function(input, output) {
 ...
 )</pre>
 
-</article></slide><slide class=""><hgroup><h2>Pratique Niv1 : sliderInput - ce qu’il fallait faire</h2></hgroup><article  id="pratique-niv1-sliderinput---ce-quil-fallait-faire-1" class="smaller">
+</article></slide><slide class=""><hgroup><h2>Pratique Niv1 : sliderInput - ce qu’il fallait faire</h2></hgroup><article  class="smaller" id="pratique-niv1-sliderinput---ce-quil-fallait-faire-1">
 
 <pre class = 'prettyprint lang-r'>server&lt;- function(input, output) {
     output$pengPlot = renderPlotly({
@@ -659,9 +659,9 @@ server&lt;- function(input, output) {
 
 </article></slide><slide class=""><hgroup><h2>Pratique Niv2 : checkboxInput - ce qu’on veut</h2></hgroup><article  id="pratique-niv2-checkboxinput---ce-quon-veut">
 
-<p><iframe data-deferred-src="appc498f63280149964208c163993300954/?w=&amp;__subapp__=1" width="100%" height="400" class="shiny-frame shiny-frame-deferred"></iframe></p>
+<p><iframe data-deferred-src="app8ce07df29a5324856694cb1eb76c53e2/?w=&amp;__subapp__=1" width="100%" height="400" class="shiny-frame shiny-frame-deferred"></iframe></p>
 
-</article></slide><slide class=""><hgroup><h2>Pratique Niv2 : checkboxInput - ce qu’il fallait faire</h2></hgroup><article  id="pratique-niv2-checkboxinput---ce-quil-fallait-faire" class="smaller">
+</article></slide><slide class=""><hgroup><h2>Pratique Niv2 : checkboxInput - ce qu’il fallait faire</h2></hgroup><article  class="smaller" id="pratique-niv2-checkboxinput---ce-quil-fallait-faire">
 
 <pre class = 'prettyprint lang-r'>ui &lt;- fluidPage(
 ...
@@ -673,7 +673,7 @@ server&lt;- function(input, output) {
 ...
 )</pre>
 
-</article></slide><slide class=""><hgroup><h2>Pratique Niv2 : checkboxInput - ce qu’il fallait faire</h2></hgroup><article  id="pratique-niv2-checkboxinput---ce-quil-fallait-faire-1" class="smaller">
+</article></slide><slide class=""><hgroup><h2>Pratique Niv2 : checkboxInput - ce qu’il fallait faire</h2></hgroup><article  class="smaller" id="pratique-niv2-checkboxinput---ce-quil-fallait-faire-1">
 
 <pre class = 'prettyprint lang-r'>server&lt;- function(input, output) {
     output$pengPlot = renderPlotly({
@@ -697,9 +697,9 @@ server&lt;- function(input, output) {
 
 </article></slide><slide class=""><hgroup><h2>Pratique Niv2 : checkboxeGroup - ce qu’on veut</h2></hgroup><article  id="pratique-niv2-checkboxegroup---ce-quon-veut">
 
-<p><iframe data-deferred-src="app660ad434ed71b22caa130f1de27c13d6/?w=&amp;__subapp__=1" width="100%" height="400" class="shiny-frame shiny-frame-deferred"></iframe></p>
+<p><iframe data-deferred-src="app9cb846311668d7e09e50fafc32a4ba2e/?w=&amp;__subapp__=1" width="100%" height="400" class="shiny-frame shiny-frame-deferred"></iframe></p>
 
-</article></slide><slide class=""><hgroup><h2>Pratique Niv2 : checkboxeGroup - ce qu’il fallait faire</h2></hgroup><article  id="pratique-niv2-checkboxegroup---ce-quil-fallait-faire" class="smaller">
+</article></slide><slide class=""><hgroup><h2>Pratique Niv2 : checkboxeGroup - ce qu’il fallait faire</h2></hgroup><article  class="smaller" id="pratique-niv2-checkboxegroup---ce-quil-fallait-faire">
 
 <pre class = 'prettyprint lang-r'>ui &lt;- fluidPage(
 ...
@@ -712,7 +712,7 @@ server&lt;- function(input, output) {
 ...
 )</pre>
 
-</article></slide><slide class=""><hgroup><h2>Pratique Niv2 : checkboxeGroup - ce qu’il fallait faire</h2></hgroup><article  id="pratique-niv2-checkboxegroup---ce-quil-fallait-faire-1" class="smaller">
+</article></slide><slide class=""><hgroup><h2>Pratique Niv2 : checkboxeGroup - ce qu’il fallait faire</h2></hgroup><article  class="smaller" id="pratique-niv2-checkboxegroup---ce-quil-fallait-faire-1">
 
 <pre class = 'prettyprint lang-r'>server&lt;- function(input, output) {
     output$pengPlot = renderPlotly({
@@ -736,9 +736,9 @@ server&lt;- function(input, output) {
 
 </article></slide><slide class=""><hgroup><h2>Pratique Niv3 : datatable - ce qu’on veut</h2></hgroup><article  id="pratique-niv3-datatable---ce-quon-veut">
 
-<p><iframe data-deferred-src="app6feb09955da6125c924d2fbd68fb9f08/?w=&amp;__subapp__=1" width="100%" height="400" class="shiny-frame shiny-frame-deferred"></iframe></p>
+<p><iframe data-deferred-src="appc58f2ea7703ad38f0c2a304f51a10244/?w=&amp;__subapp__=1" width="100%" height="400" class="shiny-frame shiny-frame-deferred"></iframe></p>
 
-</article></slide><slide class=""><hgroup><h2>Pratique Niv3 : datatable - ce qu’on pouvait faire</h2></hgroup><article  id="pratique-niv3-datatable---ce-quon-pouvait-faire" class="smaller">
+</article></slide><slide class=""><hgroup><h2>Pratique Niv3 : datatable - ce qu’on pouvait faire</h2></hgroup><article  class="smaller" id="pratique-niv3-datatable---ce-quon-pouvait-faire">
 
 <pre class = 'prettyprint lang-r'>ui &lt;- fluidPage(
 ...
@@ -751,7 +751,7 @@ server&lt;- function(input, output) {
 ...
 )</pre>
 
-</article></slide><slide class=""><hgroup><h2>Pratique Niv3 : datatable - ce qu’on pouvait faire</h2></hgroup><article  id="pratique-niv3-datatable---ce-quon-pouvait-faire-1" class="smaller">
+</article></slide><slide class=""><hgroup><h2>Pratique Niv3 : datatable - ce qu’on pouvait faire</h2></hgroup><article  class="smaller" id="pratique-niv3-datatable---ce-quon-pouvait-faire-1">
 
 <pre class = 'prettyprint lang-r'>server&lt;- function(input, output) {
     output$pengPlot = renderPlotly({
@@ -799,7 +799,7 @@ server&lt;- function(input, output) {
 
 <p>Cette fonction confère un statut réactif à un objet. A chaque fois qu’un &ldquo;input&rdquo; sera modifié, le script créant notre objet sera relancé et les scripts traitant cet objet le seront également.</p>
 
-</article></slide><slide class=""><hgroup><h2>Pratique Niv3 : function reactive</h2></hgroup><article  id="pratique-niv3-function-reactive" class="small">
+</article></slide><slide class=""><hgroup><h2>Pratique Niv3 : function reactive</h2></hgroup><article  class="small" id="pratique-niv3-function-reactive">
 
 <pre class = 'prettyprint lang-r'>server&lt;- function(input, output) {
   penguinsBIS&lt;-reactive({penguins%&gt;% 
@@ -828,7 +828,7 @@ server&lt;- function(input, output) {
 <li>sex</li>
 </ul>
 
-</article></slide><slide class=""><hgroup><h2>Pratique Niv4 : sélection séquentielle - ce qu’on est tenté de faire</h2></hgroup><article  id="pratique-niv4-sélection-séquentielle---ce-quon-est-tenté-de-faire" class="small">
+</article></slide><slide class=""><hgroup><h2>Pratique Niv4 : sélection séquentielle - ce qu’on est tenté de faire</h2></hgroup><article  class="small" id="pratique-niv4-sélection-séquentielle---ce-quon-est-tenté-de-faire">
 
 <pre class = 'prettyprint lang-r'>ui &lt;- fluidPage(
 ...
@@ -842,7 +842,7 @@ server&lt;- function(input, output) {
 ...
 )</pre>
 
-</article></slide><slide class=""><hgroup><h2>Pratique Niv4 : sélection séquentielle - ce qu’on est tenté de faire</h2></hgroup><article  id="pratique-niv4-sélection-séquentielle---ce-quon-est-tenté-de-faire-1" class="small">
+</article></slide><slide class=""><hgroup><h2>Pratique Niv4 : sélection séquentielle - ce qu’on est tenté de faire</h2></hgroup><article  class="small" id="pratique-niv4-sélection-séquentielle---ce-quon-est-tenté-de-faire-1">
 
 <pre class = 'prettyprint lang-r'>server&lt;- function(input, output) {
     output$pengPlot = renderPlotly({
@@ -858,9 +858,9 @@ server&lt;- function(input, output) {
 
 }</pre>
 
-</article></slide><slide class=""><hgroup><h2>Pratique Niv4 : sélection séquentielle - ce que ça donne</h2></hgroup><article  id="pratique-niv4-sélection-séquentielle---ce-que-ça-donne" class="small">
+</article></slide><slide class=""><hgroup><h2>Pratique Niv4 : sélection séquentielle - ce que ça donne</h2></hgroup><article  class="small" id="pratique-niv4-sélection-séquentielle---ce-que-ça-donne">
 
-<p><iframe data-deferred-src="app2a3dbc443f5be79d0107d93a3b7a0acc/?w=&amp;__subapp__=1" width="100%" height="400" class="shiny-frame shiny-frame-deferred"></iframe></p>
+<p><iframe data-deferred-src="appa198209fde8a0e137e795b0d935e6eb0/?w=&amp;__subapp__=1" width="100%" height="400" class="shiny-frame shiny-frame-deferred"></iframe></p>
 
 </article></slide><slide class=""><hgroup><h2>Le problème …</h2></hgroup><article  id="le-problème-1">
 
@@ -893,7 +893,7 @@ server&lt;- function(input, output) {
 
 <p>On crée un flux d’information de l’<strong>&ldquo;UI&rdquo;</strong> vers le <strong>&ldquo;SERVER&rdquo;</strong> puis du <strong>&ldquo;SERVER&rdquo;</strong> vers l’<strong>&ldquo;UI&rdquo;</strong> etc.</p>
 
-</article></slide><slide class=""><hgroup><h2>Pratique Niv4 : sélection séquentielle - ce qu’il faut faire</h2></hgroup><article  id="pratique-niv4-sélection-séquentielle---ce-quil-faut-faire" class="smaller">
+</article></slide><slide class=""><hgroup><h2>Pratique Niv4 : sélection séquentielle - ce qu’il faut faire</h2></hgroup><article  class="smaller" id="pratique-niv4-sélection-séquentielle---ce-quil-faut-faire">
 
 <pre class = 'prettyprint lang-r'>ui &lt;- fluidPage(
 ...
@@ -907,7 +907,7 @@ server&lt;- function(input, output) {
 ...
 )</pre>
 
-</article></slide><slide class=""><hgroup><h2>Pratique Niv4 : sélection séquentielle - ce qu’il faut faire</h2></hgroup><article  id="pratique-niv4-sélection-séquentielle---ce-quil-faut-faire-1" class="smaller">
+</article></slide><slide class=""><hgroup><h2>Pratique Niv4 : sélection séquentielle - ce qu’il faut faire</h2></hgroup><article  class="smaller" id="pratique-niv4-sélection-séquentielle---ce-quil-faut-faire-1">
 
 <pre class = 'prettyprint lang-r'>server&lt;- function(input, output, session) {
   
@@ -929,7 +929,7 @@ server&lt;- function(input, output) {
 
 </article></slide><slide class=""><hgroup><h2>Pratique Niv4 : sélection séquentielle - ce que ça donne</h2></hgroup><article  id="pratique-niv4-sélection-séquentielle---ce-que-ça-donne-1">
 
-<p><iframe data-deferred-src="app548eaf9062aee2a0fef8f8e4d1aeb898/?w=&amp;__subapp__=1" width="100%" height="400" class="shiny-frame shiny-frame-deferred"></iframe></p>
+<p><iframe data-deferred-src="appa71471600c15ea48948d32d6dd29366c/?w=&amp;__subapp__=1" width="100%" height="400" class="shiny-frame shiny-frame-deferred"></iframe></p>
 
 </article></slide><slide class=""><hgroup><h2>Pour aller + loin</h2></hgroup><article  id="pour-aller-loin">
 
@@ -949,7 +949,7 @@ server&lt;- function(input, output) {
 
 </article></slide><slide class=""><hgroup><h2>Structurer un tableau de bord</h2></hgroup><article  id="structurer-un-tableau-de-bord-1">
 
-<p><iframe data-deferred-src="appff373934de97c22f585b4126b5413843/?w=&amp;__subapp__=1" width="100%" height="400" class="shiny-frame shiny-frame-deferred"></iframe></p>
+<p><iframe data-deferred-src="appb936ed88119e2ef2c60a7d7dbd3dcf5d/?w=&amp;__subapp__=1" width="100%" height="400" class="shiny-frame shiny-frame-deferred"></iframe></p>
 
 </article></slide><slide class=""><hgroup><h2>Structurer un tableau de bord</h2></hgroup><article  id="structurer-un-tableau-de-bord-2">
 
@@ -961,7 +961,7 @@ server&lt;- function(input, output) {
 
 </article></slide><slide class=""><hgroup><h2>Structurer un tableau de bord</h2></hgroup><article  id="structurer-un-tableau-de-bord-3">
 
-<p><iframe data-deferred-src="app092a4b47bbdc9d710d23e225c4245bc6/?w=&amp;__subapp__=1" width="100%" height="400" class="shiny-frame shiny-frame-deferred"></iframe></p>
+<p><iframe data-deferred-src="app7616bb29aef472aa7e717b9d02901431/?w=&amp;__subapp__=1" width="100%" height="400" class="shiny-frame shiny-frame-deferred"></iframe></p>
 
 </article></slide><slide class=""><hgroup><h2>Notions d’esthétique</h2></hgroup><article  id="notions-desthétique">
 
@@ -975,11 +975,11 @@ server&lt;- function(input, output) {
 
 </article></slide><slide class=""><hgroup><h2>Notions d’esthétique</h2></hgroup><article  id="notions-desthétique-1">
 
-<p><iframe data-deferred-src="app11b77164fa5c112fe240e535e585c2ec/?w=&amp;__subapp__=1" width="100%" height="400" class="shiny-frame shiny-frame-deferred"></iframe></p>
+<p><iframe data-deferred-src="app6dc6c36c80779c0036823128ebcff7a8/?w=&amp;__subapp__=1" width="100%" height="400" class="shiny-frame shiny-frame-deferred"></iframe></p>
 
 </article></slide><slide class=""><hgroup><h2>Notions d’esthétique</h2></hgroup><article  id="notions-desthétique-2">
 
-<p><iframe data-deferred-src="appa80d7a0e13c0281dae59c0d9d33bec3f/?w=&amp;__subapp__=1" width="100%" height="400" class="shiny-frame shiny-frame-deferred"></iframe></p>
+<p><iframe data-deferred-src="appfc28be1835d8a11b9058624641b3fe60/?w=&amp;__subapp__=1" width="100%" height="400" class="shiny-frame shiny-frame-deferred"></iframe></p>
 
 </article></slide><slide class=""><hgroup><h2>Notions d’esthétique</h2></hgroup><article  id="notions-desthétique-3">
 
@@ -992,7 +992,7 @@ server&lt;- function(input, output) {
 
 </article></slide><slide class=""><hgroup><h2>Notions d’esthétique</h2></hgroup><article  id="notions-desthétique-4">
 
-<p><iframe data-deferred-src="app932ea4e8d80552a54a6c347626e01ee0/?w=&amp;__subapp__=1" width="100%" height="400" class="shiny-frame shiny-frame-deferred"></iframe></p>
+<p><iframe data-deferred-src="appdf970770624e0482e0b1eb62541aeaa5/?w=&amp;__subapp__=1" width="100%" height="400" class="shiny-frame shiny-frame-deferred"></iframe></p>
 
 </article></slide><slide class=""><hgroup><h2>Notions d’esthétique</h2></hgroup><article  id="notions-desthétique-5">
 
