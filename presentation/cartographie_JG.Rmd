@@ -1,0 +1,432 @@
+---
+title: "Présentation outils de dessins pour R"
+author: "Jerome Guitton"
+date: "23/02/2021"
+output:
+  ioslides_presentation:
+  widescreen: true
+  
+---
+<style>
+    slides > slide {
+        width:100%;
+        height:100%;
+        left:5px;
+        top: 5px;
+        margin-left:0px;
+        margin-top:0px;
+    }
+</style>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+setwd("/home2/jerome/BAS_jerome/39")
+rm(list=ls())
+
+library(sf)
+library(tidyr)
+library(knitr)
+library(kableExtra)
+library(dplyr)
+library(ggplot2)
+library(scatterpie)
+```
+
+## Présentation arts plastiques et spatialisation (mais surtout arts plastiques)
+
+Téléchargement des données : <A href='donnees.zip'>donnees.zip</A>
+
+Téléchargement de la présentation en pdf : <A href='Art_plast.pdf'>Art_plast.pdf</A>
+
+A décompresser dans votre répertoire de travail
+
+## Boite à outils
+
+
+* Les librairies 
+  + dplyr, tidyr,ggplot2 (Well known one)
+  + sf (Simple Features for R)
+  + leaflet (pour se la pèter - importance de la forme sur le fond)
+
+* Des données 
+  + un fichier csv avec des positions GPS de pêcheurs artisans en guinée
+  + un shapefile des pays
+  + un shapefile d'une grille régulière (rectangles statistiques)
+
+
+## Les données
+
+### Des points, le fichier points.csv
+
+
+
+```{r }
+
+
+
+gps.df<-read.csv2("points.csv")
+
+
+head(gps.df) %>% kable("html") %>%  
+  kable_styling(font_size = 14,full_width = F)%>% 
+  kable_minimal() %>% 
+  row_spec(0, font_size=9)
+
+
+
+
+```
+## Les données
+
+Des points, le dataframe devient un objet sf ---> st_as_sf
+
+
+```{r }
+
+gps <- st_as_sf(gps.df, coords = c("longitude", "latitude"), crs = 4326)
+
+g1<-ggplot(gps) + geom_sf()
+
+
+
+```
+<img src="g1.png">
+
+## Les données
+
+Des shapefiles : des données dans un contexte spatial 
+
+  1 - world_borders.shp (et dbf associés)
+
+
+
+```{r }
+
+
+world<-st_read('world_borders.shp',crs=4326)
+
+world.gg<-ggplot(world) + geom_sf()
+
+
+```
+<img src="world.png">
+
+## Pourquoi du sf
+
+* un objet spatial est plus qu'un data frame
+* ce plus, c'est qu'on y associe un système de coordonnées 
+  + les x y sont ils en mètres, en degrées
+  + le x0,y0 est ce le 12 rue de la perrière, La chappelle-Launay 44260 ou le 0,0 de Null Island (cf wikipedia)
+
+Cela permet de mettre ensemble des données spatiales décrites en degré depuis Bastia ou en mètre depuis Ajaccio
+
+Le code CRS (n° de la projection) : https://epsg.org/search/by-name
+
+
+## En fait un objet spatial qu'est ce que c'est 
+
+<div style="float: left; width: 50%;">
++ Des données attributaires qui vont caractériser chaque éléments de mon dessin (contenues dans le .dbf associé)
+
+
+
+```{r }
+
+
+head(as.data.frame(world)) %>% 
+  kable("html") %>%  
+  kable_styling(font_size = 14,full_width = F)%>% 
+  kable_minimal() %>%  row_spec(0, font_size=9)
+
+
+```
+</div>
+<div style="float: right; width: 50%;">
++ Un fichier de dessin (shapefile) dans un système de coordonnées
+
+```{r message=FALSE,warning=FALSE,fig.height = 3, fig.width = 5}
+
+world %>% 
+  st_crop(xmin = -8, ymin = 47, xmax = 0, ymax = 52) %>% 
+  ggplot() + geom_sf()
+
+
+```
+</div>
+
+
+## Des attributs une valeur associée à chaque portion de mon dessin  --> contenu dans le fichier .dbf
+
+
+```{r }
+
+world  %>% ggplot() + geom_sf(aes(fill=POP_CNTRY)) ->world.gg2
+
+
+
+```
+<img src="world2.png">
+
+
+
+
+## Les données
+
+### Des shapefile : des données dans un contexte spatial 2 - grille.shp  (et dbf associés)
+
+
+
+```{r }
+
+
+grille<-st_read('grille.shp',crs=4326)
+
+ggplot(grille) + geom_sf()
+
+
+
+```
+
+## Ce que l'on va faire 1
+
+
+ * Lire le fichier CSV (read.csv2)
+ * Transformer les points en objet sf (st_as_sf - système de coordonnées 4326)
+ * Lire le fichier world_borders.shp (st_read - système de coordonnées 4326)
+ * Faire une carte avec les points et un fond de carte - world_borders (st_crop + st_buffer + geom_sf) 
+
+```{r message=FALSE,warning=FALSE}
+
+bb<-st_bbox(st_buffer(gps,0.2))
+
+st_crop(world,xmin=bb$xmin[[1]],ymin=bb$ymin[[1]],xmax=bb$xmax[[1]],ymax=bb$ymax[[1]]) ->fond
+
+
+g2<-ggplot(gps) + 
+  geom_sf(color='red',cex=0.2)+geom_sf(data=fond)
+
+#ggplot(points) + geom_sf(color='red',cex=0.2)+geom_sf(data=fond)+facet_grid(~code_engin)
+
+
+```
+<img src="g2.png">
+
+
+## Ce que l'on va faire 2
+
+
+ * Lire le fichier grille (shapefile grille.shp et dbf associé - st_read) 
+ * Compter le nombre de points dans chaque éléments de ma grille (st_join)
+ * Faire une carte avec les nombre de points par carrés statistiques (geom_sf)
+
+```{r message=FALSE,warning=FALSE}
+
+
+grille %>% st_join(gps,join = st_intersects,left=FALSE)  %>% 
+  group_by(code_engin,id) %>% 
+  dplyr::summarize(npoints=n())->grille_points
+
+g3<-ggplot(grille_points)+
+  geom_sf(aes(fill=npoints),lwd = 0)+
+  geom_sf(data=gps,cex=0.1)+facet_grid(~code_engin)
+
+
+
+```
+<img src="g3.png">
+
+
+
+##  Ce que l'on va faire 3
+
+
+Je veux des ronds proportionnels Mdame !! (st_centroid + parametre size)
+ 
+```{r message=FALSE,warning=FALSE}
+
+grille_points %>% mutate(centre=st_centroid(geometry)) %>% 
+  ggplot()+geom_sf(aes(geometry=centre,size=npoints,col='red'))+
+  geom_sf(data=fond)+facet_grid(~code_engin)
+
+```
+
+## Ce que l'on va faire 4
+
+ * Je veux des du St Nectaire maintenant !! 
+ + pour un camembert, il faut un dataframe avec les latitude et longitude du centre de mon camembert (=au centre de ma grille --> st_centroid) et pour obtenir st_x
+ + il faut mettre les éléments de mon camembert en colonnes puisque je veux mettre les parts de chaque engins dans mon camembert (pivot_wider)
+ + en mettant les engins en colonne, je me retrouve avec des NA pour certains engins qui ne sont pas présents dans les rectangles statistiques, je vais remplacer ces na par des 0 (replace_na)
+ + Je vais creer une colonne avec le total des présences des 2 engins 
+ 
+```{r message=FALSE,warning=FALSE}
+
+grille_points %>% 
+  mutate(longi=st_coordinates(st_centroid(geometry))[,1],lati=st_coordinates(st_centroid(geometry))[,2]) %>% 
+  st_drop_geometry() %>% 
+  pivot_wider(names_from=code_engin,values_from=npoints) %>% 
+  replace_na(list(FMCy = 0,FMD=0)) %>% 
+  mutate(total=FMCy+FMD)->grille_cam
+
+grille_cam %>% kable("html") %>%
+  kable_styling(font_size = 14,full_width = F) %>% 
+  kable_minimal()
+```
+
+## Ce que l'on va faire 4
+
+ * enfin je fais la carte (geom_scatterpie)
+
+
+```{r }
+
+cam<-ggplot()+geom_sf(data=fond)+
+  geom_scatterpie(aes(x=longi,y=lati,group=id,r=total/200000),data=grille_cam,cols=c('FMCy','FMD'))+
+   geom_scatterpie_legend(grille_cam$total/200000, x=-13.5, y=9.1)
+
+cam
+```
+
+
+## Rappels
+
+<div style="float: left; width: 50%;">
+
+La liste des fonctions et packages
+
+* <B>sf </B>
+  + <U>st_read</U> : Lecture d'un fichier spatial (shapefile, postgis, mapinfo ....)
+  + <U>st_as_sf</U> : Convertir un objet (dataframe par exemple) en objet sf, objet spatial.
+  + <U>st_crop</U> : Découper un objet spatial selon une emprise
+  + <U>st_centroid</U> : Renvoyer le centre d'un polygone
+  + <U>st_join </U>: Faire une jointure spatiale, sur la base d'une interaction de 2 objets dans l'espace
+* <B>ggplot2 </B>
+  + <U>geom_sf</U> : Affiche un objet sf 
+* <B>scatterpie </B>
+  + <U>geom_scatterpie</U> : affiche des camemberts aux coordonnées x et y en utilisant un vecteur de colonne pour les parts de camemberts
+
+</div>
+<div style="float: right; width: 50%;">
+
+<img src="g3.png">
+```{r message=FALSE,warning=FALSE,fig.height = 3, fig.width = 5}
+
+
+
+cam
+
+
+```
+</div>
+
+
+## Extensions leaflet
+
+<div style="float: left; width: 50%;">
+
+```{r echo=TRUE,eval=FALSE}
+library(leaflet)
+leaflet(grille_points) %>% 
+  addProviderTiles("CartoDB.Positron") %>% 
+  addPolygons(color = "black",
+  fillColor = ~colorQuantile("YlOrRd", npoints)(npoints))
+
+
+```
+
+</div>
+<div style="float: right; width: 50%;">
+
+
+```{r echo=FALSE,message=FALSE,warning=FALSE}
+library(leaflet)
+leaflet(grille_points) %>% 
+  addProviderTiles("CartoDB.Positron") %>% 
+  addPolygons(color = NA,
+  fillColor = ~colorQuantile("YlOrRd", npoints)(npoints))
+
+
+```
+</div>
+
+
+## Extensions leaflet
+
+<div style="float: left; width: 50%;">
+
+
+  
+```{r echo=TRUE,eval=FALSE}
+library(leaflet)
+leaflet(grille_cam) %>% 
+  addProviderTiles("CartoDB.Positron") %>% 
+  addCircles(lng = ~longi, lat = ~lati, weight = 1,
+  radius = ~sqrt(total) * 30, 
+  popup = paste('Le nombre de position est ',grille_cam$total))
+
+
+```
+
+</div>
+<div style="float: right; width: 50%;">
+
+
+```{r echo=FALSE,message=FALSE,warning=FALSE}
+library(leaflet)
+leaflet(grille_cam) %>% 
+  addProviderTiles("CartoDB.Positron") %>% 
+  addCircles(lng = ~longi, lat = ~lati, weight = 1,radius = ~sqrt(total) * 30, 
+             popup = paste('Le nombre de position est ',grille_cam$total))
+
+
+```
+</div>
+
+## Extensions leaflet.extra2
+
+<div style="float: left; width: 50%;">
+
+
+  
+```{r echo=TRUE,eval=FALSE}
+library(leaflet.extras2)
+library(geojsonsf)
+
+gps$date_heure2<-as.POSIXct(gps$date_heure)
+
+
+gps %>% filter(no_trajet==1175) -> gps.1175
+
+leaflet(gps.1175) %>% 
+  addProviderTiles("CartoDB.Positron") %>%  
+  addCircleMarkers(radius = 0.1) %>%
+  addTiles() %>%addTimeslider(data = gps.1175,
+  options = timesliderOptions(position = "topright",
+  timeAttribute = "date_heure2",range = TRUE,alwaysShowDate=TRUE)) %>%
+  setView(-13.5, 9.3, 11) 
+
+```
+
+</div>
+<div style="float: right; width: 50%;">
+
+
+```{r echo=FALSE,message=FALSE,warning=FALSE}
+library(leaflet.extras2)
+library(geojsonsf)
+
+gps$date_heure2<-as.POSIXct(gps$date_heure)
+
+
+gps %>% filter(no_trajet==1175) -> gps.1175
+
+leaflet(gps.1175) %>% 
+  addProviderTiles("CartoDB.Positron") %>%  addCircleMarkers(radius = 0.1) %>%
+  addTiles() %>%
+  addTimeslider(data = gps.1175,
+  options = timesliderOptions(position = "topright",timeAttribute = "date_heure2",range = TRUE,alwaysShowDate=TRUE)) %>%
+  setView(-13.5, 9.3, 11) 
+
+
+```
+</div>
+

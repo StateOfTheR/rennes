@@ -7,7 +7,23 @@
     <description>State Of The R in Rennes
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>Fri, 08 Jan 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 11 Mar 2021 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Dessiner des cartes avec R</title>
+      <dc:creator>Marie Etienne</dc:creator>
+      <link>https://StateoftheRRennes.github.io/posts/2021-03-11-dessiner-des-cartes-avec-r</link>
+      <description>Des outils et des méthodes pour utiliser R comme un logiciel de cartographie proposés par Jérôme Guitton.</description>
+      <guid>https://StateoftheRRennes.github.io/posts/2021-03-11-dessiner-des-cartes-avec-r</guid>
+      <pubDate>Thu, 11 Mar 2021 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Introduction à Shiny</title>
+      <dc:creator>Marie Etienne</dc:creator>
+      <link>https://StateoftheRRennes.github.io/posts/2021-03-11-introduction-shiny</link>
+      <description>Démarrer avec Shiny grâce à Pierre-Yves Hernvann</description>
+      <guid>https://StateoftheRRennes.github.io/posts/2021-03-11-introduction-shiny</guid>
+      <pubDate>Fri, 05 Feb 2021 00:00:00 +0000</pubDate>
+    </item>
     <item>
       <title>Introduction tidyverse</title>
       <dc:creator>Marie Etienne</dc:creator>

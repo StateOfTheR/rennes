@@ -1,0 +1,1544 @@
+---
+title: "Don't Worry, Be Shiny - SOTR Rennes"
+author: "P.-Y. HERNVANN"
+date: "06/02/2021"
+output: ioslides_presentation
+widescreen: true
+smaller: true
+runtime : shiny
+---
+
+```{r setup,   cahe = FALSE, eval = TRUE, echo = FALSE, message = FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+#webshot::install_phantomjs() # pour afficher les apps dans les diapos
+library(shiny)
+library(ggplot2)
+library(dplyr)
+library(kableExtra)
+library(shinydashboard)
+library(shinythemes)
+library(DT)
+library(plotly)
+with_sol <- FALSE 
+with_course <- TRUE
+```
+
+## Programme de la séance
+
+- Architecture d'une application Shiny
+- Notion de réactivité de objets
+- Pratique sur exemples simples
+- Comment partager une application
+
+## Disponibilité
+
+Les fichiers seront sur le SOTR Rennes :
+
+<https://stateofther.github.io/rennes/>.
+
+La séance est enregistrée et sera disponible par ici :
+
+<http://MPEjetelaissefairetatambouille.com>.
+
+## Intérêt de Shiny
+
+Une application est avant tout un outil adapté à la diffusion & à la collaboration :
+
+> - une seule interface utilisable par plusieurs personnes simultanément
+> - requiert seulement un navigateur web pour l'utilisation
+> - permet de toucher un public ne sachant pas utiliser R
+> - qui dit intéractivité dit implication
+      
+## Intérêt de Shiny
+
+Une application est avant tout un outil adapté à la diffusion & à la collaboration :
+
+ - une seule interface utilisable par plusieurs personnes simultanément
+ - requiert seulement un navigateur web pour l'utilisation
+ - permet de toucher un public ne sachant pas utiliser R
+ - qui dit intéractivité dit implication
+ 
+      
+...et tout ça depuis R !!!
+
+## Eh pour quoi faire ?!
+
+
+Une application Shiny peut servir à :
+
+> - Rendre assessible / Diffuser un jeu de données exploration ou téléchargement
+> - ...et les analyses / statistiques associées
+> - Créer un espace collaboration pour l'analyse de résultats
+> - Diffuser un outil d'analyse (chacun y met sa propre donnée)
+> - Collecter de la donnée
+> - etc...
+
+## Quelques liens utiles
+Livres & tutos
+
+- [Encoooore un livre d'Hadley Wickham](https://mastering-shiny.org/)
+- [Tutoriel de RStudio](https://shiny.rstudio.com/tutorial/)
+- [Exemples d'applications du basique au haut niveau](https://shiny.rstudio.com/gallery/)
+- [R Graphics Cookbook](http://www.cookbook-r.com/)
+- [Shinydashboard](https://rstudio.github.io/shinydashboard/)
+
+
+## Architecture d'une application Shiny
+
+Une application Shiny comporte deux composants majeurs qui vont intéragir en permanence lors de l'utilisation :
+
+> - la **"UI"**, pour "User Interface"- génère ce que l'on voit 
+> - le **"SERVER"** - fonction régissant ce qui se passe derrière
+
+## Architecture d'une application Shiny {.smaller}
+
+```{r shiny structure, eval = F, echo = T}
+
+shinyApp(
+
+  ui = fluidPage(
+    titlePanel("Bienvenue sur ta 1e application !"),
+    sidebarLayout(
+      sidebarPanel(
+        strong("BARRE LATERALE"),
+        br(),
+        "C'est ici que vous pourrez rentrer les informations/instructions utilisées par l'application pour visualiser différents éléments"
+      ),
+      mainPanel(
+        strong("PANNEAU PRINCIPAL:"),
+        br(),
+        "C'est là que seront représentées les sorties (graphiques, tableaux, texte, images etc.)"
+    )
+  )
+  ),
+  
+  server = function(input, output) {}
+  
+)
+
+```
+
+
+## Architecture d'une application Shiny {.smaller}
+
+Plus pratique pour les grosses applications :
+
+```{r shiny structure bis, eval = F, echo = T}
+
+ui <- fluidPage(
+  
+  titlePanel("Bienvenue sur ta 1e application !"),
+  sidebarLayout(
+    sidebarPanel(
+      strong("BARRE LATERALE"),
+      br(),
+      "C'est ici que vous pourrez rentrer les informations/instructions utilisées par l'application pour visualiser différents éléments"
+      ),
+    mainPanel(
+      strong("PANNEAU PRINCIPAL:"),
+      br(),
+      "C'est là que seront représentées les sorties (graphiques, tableaux, texte, images etc.)"
+      )
+  )
+)
+
+server<- function(input, output) {}
+shinyApp(ui, server)
+
+```
+
+## Architecture d'une application Shiny {.smaller}
+
+Un aperçu de ce que ça donne :
+
+```{r shiny structure 2, eval = T, echo = F}
+
+ui <- fluidPage(
+  
+  titlePanel("Bienvenue sur ta 1e application !"),
+  sidebarLayout(
+    sidebarPanel(
+      strong("BARRE LATERALE"),
+      br(),
+      "C'est ici que vous pourrez rentrer les informations/instructions utilisées par l'application pour visualiser différents éléments"
+      ),
+    mainPanel(
+      strong("PANNEAU PRINCIPAL:"),
+      br(),
+      "C'est là que seront représentées les sorties (graphiques, tableaux, texte, images etc.)"
+      )
+  )
+)
+
+server<- function(input, output) {}
+shinyApp(ui, server)
+
+```
+
+
+## Parce qu'on est tous un petit peu ornithologues {.smaller}
+
+```{r palmer_data, eval = TRUE, echo = TRUE, message=F}
+#remotes::install_github("allisonhorst/palmerpenguins")
+data(penguins,package = "palmerpenguins")
+penguins <- penguins %>%
+  rename(bill_l = bill_length_mm, bill_d = bill_depth_mm, flip_l = flipper_length_mm, bm = body_mass_g)
+penguins %>%
+  print(n=2)
+```
+
+## Parce qu'on est tous un petit peu ornithologues {.smaller}
+
+Tronche de pingouin :
+
+```{r palmer_data_summ, eval = T, echo = F}
+
+summary(penguins)
+
+```
+
+## Parce qu'on est tous un petit peu ornithologues {.smaller}
+
+Exemple de graph à partir duquel vous travaillerez:
+
+```{r palmer_data_plot, eval = T, echo = F, message = F, warning =F}
+      penguins %>% 
+        ggplot() + aes( x= bill_l, y=bill_d, col = species) + geom_point() + 
+        labs( x = 'Bill length in mm') +
+        labs(y = 'Bill depth in mm') +
+        labs(color = "Species")
+```
+
+## Exercices pratiques
+
+En tripatouillant autour de ce jeu de données et de ce graph, nous allons essayer de réaliser qlq exercices pratiques de niveau croissant:
+
+- Niv.1 = interactivité de base - utiliser un widget 
+- Niv.2 = interactivité de base - faire dialoguer code et widgets
+- Niv.3 = gestion de la réactivité d'un objet
+- Niv.4 = réactivité et feedback **"SERVER"** --> **"UI"**
+
+## Représenter graphiquement notre donnée {.smaller}
+
+```{r generate graph expl run, eval = T, echo = F}
+
+ui <- fluidPage(
+  titlePanel("Ma Donnée de Piafs"),
+  sidebarLayout(
+    sidebarPanel(
+      "Pour l'instant, pas d'intéractivité, vous dîtes seulement à l'application de représenter une figure 'figée'."
+      )
+    ,
+  mainPanel(
+    "Ci-dessous notre jolie figure :",
+        plotOutput("pengPlot")
+    )
+  )
+)
+server<- function(input, output) {
+    output$pengPlot = renderPlot({
+      penguins %>% 
+        ggplot() + aes( x= bill_l, y=bill_d, col = species) + geom_point() + 
+        labs( x = 'Bill length in mm') +
+        labs(y = 'Bill depth in mm') +
+        labs(color = "Species")+theme_light()
+      })
+}
+
+shinyApp(ui, server)
+
+```
+
+## Représenter graphiquement notre donnée 
+Comment a-t-on fait ?
+
+## Représenter graphiquement notre donnée {.smaller}
+
+```{r generate graph expl, eval = F, echo = T}
+
+ui <- fluidPage(
+  titlePanel("Ma Donnée de Piafs"),
+  sidebarLayout(
+    sidebarPanel(
+      "Pour l'instant, pas d'intéractivité, vous dîtes seulement à l'application de représenter une figure 'figée'."
+      )
+    ,
+  mainPanel(
+    "Ci-dessous notre jolie figure :",
+        plotOutput("pengPlot")
+    )
+  )
+)
+server<- function(input, output) {
+    output$pengPlot = renderPlot({
+      penguins %>% 
+        ggplot() + aes( x= bill_l, y=bill_d, col = species) + geom_point() + 
+        labs( x = 'Bill length in mm') +
+        labs(y = 'Bill depth in mm') +
+        labs(color = "Species")+
+        theme_light()
+      })
+}
+
+shinyApp(ui, server)
+
+```
+
+## Représenter graphiquement notre donnée  {.smaller}
+
+Comment a-t-on fait ?
+
+- On crée notre graph *"output$pengPlot"* dans **Server**
+
+```{r how generate graph1, eval = F, echo = T}
+    output$pengPlot = renderPlot({
+      penguins %>% 
+        ggplot() + aes( x= bill_l, y=bill_d, col = species) + geom_point() + 
+        labs( x = 'Bill length in mm') +
+        labs(y = 'Bill depth in mm') +
+        labs(color = "Species")+
+        theme_light()
+      })
+```
+
+## Représenter graphiquement notre donnée {.smaller}
+
+Comment a-t-on fait ?
+
+- On crée notre graph *"output$pengPlot"* dans **Server**
+- On l'appelle dans l'**UI**
+
+```{r how generate graph2, eval = F, echo = T}
+  mainPanel(
+    "Ci-dessous notre jolie figure :",
+        plotOutput("pengPlot")
+    )
+```
+
+## Représenter graphiquement notre donnée {.smaller}
+
+Comment a-t-on fait ?
+
+- On crée notre graph *"output$pengPlot"* dans **Server**
+- On l'appelle dans l'**UI**
+...Ceci grâce à deux fonctions Shiny complémentaires:
+```{r how generate graph3, eval = F, echo = T}
+renderPlot()
+plotOutput()
+```
+
+## Les fonctions Shiny
+
+Les fonctions Shiny permettent de
+
+> - créer des objets "réactifs"
+> - contrôler les conditions de leur réactivité
+> - représenter des sorties de différents types : code/texte/tables/graphs
+
+
+## Les fonctions Shiny
+
+Les fonctions Shiny permettent de
+
+- créer des objets "réactifs"
+- contrôler les conditions de leur réactivité
+- représenter des sorties de différents types : code/texte/tables/graphs
+
+On verra dans ce TD quelques fonctions Shiny. Commençons par les fonctions appartenant à la 3e catégorie.
+
+## Les fonctions Render*
+
+Génèrent des sorties de différents types dans l'UI
+
+Prennent en entrée une / plusieurs lignes de code générant cette sortie
+
+L'objet répond à chaque fois qu'une valeur réactive présente dans le code change
+
+
+## Les fonctions Render*
+
+
+Fonction (Server)    | Creates                        | UI (appelle l'obj. créé dans server)       
+-------------------- | -------------------------------|-----------
+renderDataTable()    | An interactive table           | dataTableOutput() 
+renderImage()        | An image                       | imageOutput()
+renderPlot()         | A plot                         | plotOutput()
+renderPrint()        | A code block of printed output | print() 
+renderTable()        | A table                        | tableOutput()  
+renderText()         | A character string             | textOutput() 
+renderUI()           | A Shiny UI element             | uiOutput()     
+
+## Au passage, un outil sympa : Plotly
+
+Faciliter l'interactivité avec le package *plotly* (déjà chargé).
+Permet d'otenir les valeurs aux points en survolant le graph, de zoomer, de télécharger le graph en .png etc.
+Il suffit de remplacer les fonctions graphiques par :
+```{r how code plotly, eval = F, echo = T}
+renderPlotly()
+plotlyOutput()
+```
+
+## Au passage, un outil sympa : Plotly {.smaller}
+
+```{r generate graph expl run plotly, eval = T, echo = F}
+
+ui <- fluidPage(
+  titlePanel("Ma Donnée de Piafs"),
+  sidebarLayout(
+    sidebarPanel(
+      "Voilà la barre latérale qui permettra de rentrer des informations/instructions"
+      )
+    ,
+  mainPanel(
+    "Panneau principal: ici sont représentées les sorties désirées",
+        plotlyOutput("pengPlot")
+    )
+  )
+)
+
+server<- function(input, output) {
+    output$pengPlot = renderPlotly({
+      penguins %>% 
+        ggplot() + aes( x= bill_l, y=bill_d, col = species) + geom_point() + 
+        labs( x = 'Bill length in mm') +
+        labs(y = 'Bill depth in mm') +
+        labs(color = "Species")+
+        theme_light()
+      })
+}
+
+shinyApp(ui, server)
+
+```
+
+## Interactivité : comment ?
+
+Une application Shiny comporte deux composants majeurs qui vont intéragir en permanence lors de l'utilisation :
+
+- la **"UI"**, pour "User Interface"- génère ce que l'on voit 
+- le **"SERVER"** - fonction régissant ce qui se passe derrière
+
+"output" permet de communiquer de **"SERVER"** vers **"UI"**
+
+"input" permet de communiquer de **"UI"** vers **"SERVER"**
+
+## Interactivité : les Widgets Shiny
+
+Une multiplicité de "Widgets" sont à votre disposition pour faire intéragir **"UI"** et **"SERVER"**.
+
+Pour en avoir un aperçu, allez faire un tour dans la [widget gallery](https://shiny.rstudio.com/gallery/widget-gallery.html)
+
+## Interactivité : les Widgets Shiny
+
+Une multiplicité de "Widgets" sont à votre disposition pour faire intéragir **"UI"** et **"SERVER"**.
+
+Pour en avoir un aperçu, allez faire un tour dans la [widget gallery](https://shiny.rstudio.com/gallery/widget-gallery.html)
+
+Dans ce TD, on va voir quelques widgets, comment les mobiliser en fonction de nos besoins dans l'applciation, et comment les faire insérer dans notre code pour obtenir les fonctionnalités escomptées.
+
+## Le widget selectInput
+
+Créer un menu déroulant pour sélectionner l'espèce que l'on veut représenter.
+
+```{r selectinput, eval = F, echo = T}
+selectInput("NOM DE L'INPUT", label = "NOM/CONSIGNE POUR L'UTILISATEUR", 
+    choices = list("NomChoix1" = "Choix1", "NomChoix2" = "Choix2",..., "NomChoixn" = "Choixn",), 
+    selected = [Choix par défaut], multiple=[TRUE si plusieurs choix autorisés])
+```
+
+A vous de jouer!
+
+## Pratique Niv1 : selectInput - ce qu'on veut
+
+```{r graph selectinput, eval = TRUE, echo = F}
+
+ui <- fluidPage(
+  titlePanel("Exploration de données Pingouins"),
+  sidebarLayout(
+    sidebarPanel(
+      strong("Ma belle barre latérale"),
+      selectInput("select", label = h3("Select Species"), 
+    choices = list("ADELIE" = "Adelie", "CHINSTRAP" = "Chinstrap", "GENTOO" = "Gentoo"), 
+    selected = "Adelie", multiple=T)
+      )
+    ,
+  mainPanel(
+    "Panneau principal: ici sont représentées les sorties désirées",
+        plotlyOutput("pengPlot")
+    )
+  )
+)
+server<- function(input, output) {
+    output$pengPlot = renderPlotly({
+      penguins %>% 
+        filter(species%in%input$select) %>%
+        ggplot() + aes( x= bill_l, y=bill_d,col = species) + geom_point() + 
+        labs( x = 'Bill length in mm') +
+        labs(y = 'Bill depth in mm') +
+        labs(color = "Species")+
+        theme_light()
+      })
+}
+shinyApp(ui, server)
+
+```
+
+
+## Pratique Niv1 : SelectInput - ce qu'il fallait faire {.smaller}
+
+```{r graph selectinput code1, eval = F, echo = T}
+
+ui <- fluidPage(
+...
+    sidebarPanel(
+      strong("Ma belle barre latérale"),
+      selectInput("select", label = h3("Select Species"), 
+    choices = list("ADELIE" = "Adelie", "CHINSTRAP" = "Chinstrap", "GENTOO" = "Gentoo"), 
+    selected = "Adelie", multiple=T)
+      )
+...
+  )
+)
+
+```
+
+## Pratique Niv1 : SelectInput - ce qu'il fallait faire {.smaller}
+
+```{r graph selectinput code2, eval = F, echo = T}
+...
+server<- function(input, output) {
+    output$pengPlot = renderPlotly({
+      penguins %>% 
+        filter(species%in%input$select) %>%
+        ggplot() + aes( x= bill_l, y=bill_d,col = species) + geom_point() + 
+        labs( x = 'Bill length in mm') +
+        labs(y = 'Bill depth in mm') +
+        labs(color = "Species")+
+        theme_light()
+      })
+}
+...
+```
+
+
+## Le widget sliderInput
+
+Créer une glissière de sélection de plage temporelle couverte par les données représentées.
+
+```{r sliderinput, eval = F, echo = T}
+      sliderInput("NOM DE L'INPUT", label = "TITRE", min = "min value", max = "max value", value = c("min value","max value"))
+```
+
+A vous de jouer!
+
+## Pratique Niv1 : sliderInput - ce qu'on veut
+
+```{r graph sliderinput, eval = TRUE, echo = F}
+
+ui <- fluidPage(
+  titlePanel("Exploration de données Pingouins"),
+  sidebarLayout(
+    sidebarPanel(
+      strong("Ma belle barre latérale"),
+      selectInput("select", label = h3("Select Species"),
+                  choices = list("ADELIE" = "Adelie", "CHINSTRAP" = "Chinstrap", "GENTOO" ="Gentoo"),
+                  selected = "Adelie", multiple=T),
+      sliderInput("slider", label = h3("Slider"), min = 2007, max = 2009, value = c(2007,2009))
+      )
+    ,
+  mainPanel(
+    "Panneau principal: ici sont représentées les sorties désirées",
+        plotlyOutput("pengPlot")
+    )
+  )
+)
+server<- function(input, output) {
+    output$pengPlot = renderPlotly({
+      penguins %>% 
+        filter(species%in%input$select) %>%
+        filter(year>=input$slider[1]) %>%
+        filter(year<=input$slider[2]) %>%
+        ggplot() + aes( x= bill_l, y=bill_d,col = species) + geom_point() + 
+        labs( x = 'Bill length in mm') +
+        labs(y = 'Bill depth in mm') +
+        labs(color = "Species")+
+        theme_light()
+      })
+}
+shinyApp(ui, server)
+
+```
+
+## Pratique Niv1 : sliderInput - ce qu'il fallait faire {.smaller}
+
+```{r graph sliderinput1, eval = F, echo = T}
+
+ui <- fluidPage(
+...
+      selectInput("select", label = h3("Select Species"),
+                  choices = list("ADELIE" = "Adelie", "CHINSTRAP" = "Chinstrap", "GENTOO" ="Gentoo"),
+                  selected = "Adelie", multiple=T),
+      sliderInput("slider", label = h3("Slider"), min = 2007, max = 2009, value = c(2007,2009))
+...
+)
+
+```
+
+## Pratique Niv1 : sliderInput - ce qu'il fallait faire {.smaller}
+
+```{r graph sliderinput2, eval = F, echo = T}
+server<- function(input, output) {
+    output$pengPlot = renderPlotly({
+      penguins %>% 
+        filter(species%in%input$select) %>%
+        filter(year>=input$slider[1]) %>%
+        filter(year<=input$slider[2]) %>%
+        ggplot() + aes( x= bill_l, y=bill_d,col = species) + geom_point() + 
+        labs( x = 'Bill length in mm') +
+        labs(y = 'Bill depth in mm') +
+        labs(color = "Species")+
+        theme_light()
+      })
+}
+
+```
+
+## Le widget checkboxInput
+
+Permettre de représenter l'ajustement de régressions linéaires (utiliser les codes ggplot de MP Etienne dispo sur le SOTR - Rennes)
+
+```{r checkbox func, eval = F, echo = T}
+
+checkboxInput("NOM DE L'INPUT", label = "CONSIGNE", value = FALSE)
+
+```
+
+A vous de jouer !
+
+## Pratique Niv2 : checkboxInput - ce qu'on veut
+
+```{r graph checkbox, eval = TRUE, echo = F}
+
+ui <- fluidPage(
+  titlePanel("Exploration de données Pingouins"),
+  sidebarLayout(
+    sidebarPanel(
+      strong("Ma belle barre latérale"),
+      selectInput("select", label = h3("Choisir une espèce"),
+                  choices = list("ADELIE" = "Adelie", "CHINSTRAP" = "Chinstrap", "GENTOO" ="Gentoo"),
+                  selected = "Adelie", multiple=T),
+      sliderInput("slider", label = h3("Choisir une période"), min = 2007, max = 2009, value = c(2007,2009)),
+      checkboxInput("checkbox", label = "Draw regression", value = FALSE)
+      )
+    ,
+  mainPanel(
+    "Panneau principal: ici sont représentées les sorties désirées",
+        plotlyOutput("pengPlot")
+    )
+  )
+)
+server<- function(input, output) {
+    output$pengPlot = renderPlotly({
+      penguins %>% 
+        filter(species%in%input$select) %>%
+        filter(year>=input$slider[1]) %>%
+        filter(year<=input$slider[2]) %>%
+        ggplot() + aes( x= bill_l, y=bill_d,col = species) + geom_point() + 
+        labs( x = 'Bill length in mm') +
+        labs(y = 'Bill depth in mm') +
+        labs(color = "Species")+
+        theme_light()->toplot
+
+      if(input$checkbox==T){
+        toplot<-toplot+geom_smooth(method = 'lm', se = FALSE)
+      }
+      
+      toplot
+
+      })
+}
+shinyApp(ui, server)
+
+```
+
+## Pratique Niv2 : checkboxInput - ce qu'il fallait faire {.smaller}
+
+```{r graph checkbox1, eval = F, echo = T}
+
+ui <- fluidPage(
+...
+      selectInput("select", label = h3("Choisir une espèce"),
+                  choices = list("ADELIE" = "Adelie", "CHINSTRAP" = "Chinstrap", "GENTOO" ="Gentoo"),
+                  selected = "Adelie", multiple=T),
+      sliderInput("slider", label = h3("Choisir une période"), min = 2007, max = 2009, value = c(2007,2009)),
+      checkboxInput("checkbox", label = "Draw regression", value = FALSE)
+...
+)
+
+```
+
+## Pratique Niv2 : checkboxInput - ce qu'il fallait faire {.smaller}
+
+```{r graph checkbox2, eval = F, echo = T}
+
+server<- function(input, output) {
+    output$pengPlot = renderPlotly({
+      penguins %>% ...
+      ...->toplot
+      
+      if(input$checkbox==T){
+        toplot<-toplot+geom_smooth(method = 'lm', se = FALSE)
+      }
+      toplot
+      })
+}
+
+```
+
+## Le widget checkboxGroupInput
+
+Utiliser checkboxGroup pour sélectionner le type de régression (linéraire vs loess) à représenter graphiquement. Utiliser checkbox pour ajouter l'enveloppe dincertitude ou non.
+
+(outil analogue = radioButtons; mais sélection d'un seul choix possible)
+
+```{r checkboxgroup func, eval = F, echo = T}
+checkboxGroupInput("NOM DE L'INPUT", label = "Consigne", choices=c("CHOIX1"="choix1","CHOIX2"="choix2"))
+```
+
+## Pratique Niv2 : checkboxeGroup - ce qu'on veut
+
+```{r graph checkboxgroup, eval = TRUE, echo = F}
+
+ui <- fluidPage(
+  titlePanel("Exploration de données Pingouins"),
+  sidebarLayout(
+    sidebarPanel(
+      strong("Ma belle barre latérale"),
+      selectInput("select", label = h3("Choisir une espèce"),
+                  choices = list("ADELIE" = "Adelie", "CHINSTRAP" = "Chinstrap", "GENTOO" ="Gentoo"),
+                  selected = "Adelie", multiple=T),
+      sliderInput("slider", label = h3("Choisir une période"), min = 2007, max = 2009, value = c(2007,2009)),
+      checkboxGroupInput("checkbox1", label = "Draw regression", choices=c("Linear reg."="linear","Loess"="loess")),
+      checkboxInput("checkbox2", label = "Represent uncertainty", value = FALSE)
+      )
+    ,
+  mainPanel(
+    "Panneau principal: ici sont représentées les sorties désirées",
+        plotlyOutput("pengPlot")
+    )
+  )
+)
+server<- function(input, output) {
+    output$pengPlot = renderPlotly({
+      penguins %>% 
+        filter(species%in%input$select) %>%
+        filter(year>=input$slider[1]) %>%
+        filter(year<=input$slider[2]) %>%
+        ggplot() + aes( x= bill_l, y=bill_d,col = species) + geom_point() + 
+        labs( x = 'Bill length in mm') +
+        labs(y = 'Bill depth in mm') +
+        labs(color = "Species")+
+        theme_light()->toplot
+      
+      if("linear"%in%input$checkbox1){
+        toplot<-toplot+geom_smooth(method = 'lm', se = input$checkbox2)
+      }
+      if("loess"%in%input$checkbox1){
+        toplot<-toplot+geom_smooth(method = 'loess', se = input$checkbox2)
+      }
+      toplot
+      
+      })
+}
+shinyApp(ui, server)
+
+```
+
+## Pratique Niv2 : checkboxeGroup - ce qu'il fallait faire {.smaller}
+
+```{r graph checkboxgroup1, eval = F, echo = T}
+
+ui <- fluidPage(
+...
+      selectInput("select", label = h3("Choisir une espèce"),
+                  choices = list("ADELIE" = "Adelie", "CHINSTRAP" = "Chinstrap", "GENTOO" ="Gentoo"),
+                  selected = "Adelie", multiple=T),
+      sliderInput("slider", label = h3("Choisir une période"), min = 2007, max = 2009, value = c(2007,2009)),
+      checkboxGroupInput("checkbox1", label = "Draw regression", choices=c("Linear reg."="linear","Loess"="loess")),
+      checkboxInput("checkbox2", label = "Represent uncertainty", value = FALSE)
+...
+)
+
+```
+
+## Pratique Niv2 : checkboxeGroup - ce qu'il fallait faire {.smaller}
+
+```{r graph checkboxgroup2, eval = F, echo = T}
+server<- function(input, output) {
+    output$pengPlot = renderPlotly({
+      penguins %>% ...
+      ...->toplot
+      if("linear"%in%input$checkbox1){
+        toplot<-toplot+geom_smooth(method = 'lm', se = input$checkbox2)
+      }
+      if("loess"%in%input$checkbox1){
+        toplot<-toplot+geom_smooth(method = 'loess', se = input$checkbox2)
+      }
+      toplot
+      })
+}
+```
+
+## La nécessité d'utiliser des fontions réactives
+
+Ajoutez sous votre graph une table de données réactive présentant les valeurs de la table penguins sélectionnées pour le graph.
+
+A vous de jouer !
+
+## Pratique Niv3 : datatable - ce qu'on veut
+
+```{r graph datatable, eval = TRUE, echo = F}
+
+ui <- fluidPage(
+  titlePanel("Exploration de données Pingouins"),
+  sidebarLayout(
+    sidebarPanel(
+      strong("Ma belle barre latérale"),
+      selectInput("select", label = h3("Choisir une espèce"),
+                  choices = list("ADELIE" = "Adelie", "CHINSTRAP" = "Chinstrap", "GENTOO" ="Gentoo"),
+                  selected = "Adelie", multiple=T),
+      sliderInput("slider", label = h3("Choisir une période"), min = 2007, max = 2009, value = c(2007,2009)),
+      checkboxGroupInput("checkbox1", label = "Draw regression", choices=c("Linear reg."="linear","Loess"="loess")),
+      checkboxInput("checkbox2", label = "Represent uncertainty", value = FALSE)
+      )
+    ,
+  mainPanel(
+    "Panneau principal: ici sont représentées les sorties désirées",
+    plotlyOutput("pengPlot"),
+    dataTableOutput("table")
+    
+    )
+  )
+)
+server<- function(input, output) {
+    output$pengPlot = renderPlotly({
+      penguins %>% 
+        filter(species%in%input$select) %>%
+        filter(year>=input$slider[1]) %>%
+        filter(year<=input$slider[2]) %>%
+        ggplot() + aes( x= bill_l, y=bill_d,col = species) + geom_point() + 
+        labs( x = 'Bill length in mm') +
+        labs(y = 'Bill depth in mm') +
+        labs(color = "Species")+
+        theme_light()->toplot
+      
+      if("linear"%in%input$checkbox1){
+        toplot<-toplot+geom_smooth(method = 'lm', se = input$checkbox2)
+      }
+      if("loess"%in%input$checkbox1){
+        toplot<-toplot+geom_smooth(method = 'loess', se = input$checkbox2)
+      }
+      
+      toplot
+      
+    })
+    
+    output$table = renderDataTable({
+      penguins %>% 
+        filter(species%in%input$select) %>%
+        filter(year>=input$slider[1]) %>%
+        filter(year<=input$slider[2])
+      })
+}
+shinyApp(ui, server)
+
+```
+
+## Pratique Niv3 : datatable - ce qu'on pouvait faire {.smaller}
+
+```{r graph datatable1, eval = F, echo = T}
+
+ui <- fluidPage(
+...
+  mainPanel(
+    "Panneau principal: ici sont représentées les sorties désirées",
+    plotlyOutput("pengPlot"),
+    dataTableOutput("table")
+    
+    )
+...
+)
+```
+
+## Pratique Niv3 : datatable - ce qu'on pouvait faire {.smaller}
+
+```{r graph datatable2, eval = F, echo = T}
+server<- function(input, output) {
+    output$pengPlot = renderPlotly({
+      penguins %>% 
+        filter(species%in%input$select) %>%
+        filter(year>=input$slider[1]) %>%
+        filter(year<=input$slider[2]) %>%
+        ggplot() + ...+
+        theme_light()->toplot
+...
+    })
+    output$table = renderDataTable({
+      penguins %>% 
+        filter(species%in%input$select) %>%
+        filter(year>=input$slider[1]) %>%
+        filter(year<=input$slider[2])
+      })
+}
+```
+
+## Le problème ... 
+
+En procédant ainsi, l'appli fonctionne mais vous écrivez deux fois le traiement de la table *penguins*...
+
+> - Prend de la place
+> - Potentiellement plus long, en particulier lorsque le traitement de l'objet que vous voulez représenter est plus lourd
+> - Pas exactement les 2 mêmes objets finaux suivant le traitement qu'on effectue (expl tirages aléatoires)
+
+## La solution ... 
+
+En procédant ainsi, l'appli fonctionne mais vous écrivez deux fois le traiement de la table *penguins*...
+
+- Prend de la place
+- Potentiellement plus long, en particulier lorsque le traitement de l'objet que vous voulez représenter est plus lourd
+- Pas exactement les 2 mêmes objets finaux suivantle traitement qu'on effectue (expl tirages aléatoires)
+
+On va donc créer un seul et unique objet réactif qui sera le fruit du traitement de *penguins* et l'on utilisera cet objet pour la figure et la table.
+
+## La fonction Reactive
+
+Pour ce faire on utilise une fonction Shiny : reactive().
+
+Cette fonction confère un statut réactif à un objet. A chaque fois qu'un "input" sera modifié, le script créant notre objet sera relancé et les scripts traitant cet objet le seront également.
+
+
+## Pratique Niv3 : function reactive {.small}
+
+```{r reactive, eval = F, echo = T}
+
+server<- function(input, output) {
+  penguinsBIS<-reactive({penguins%>% 
+        filter(species%in%input$select) %>%
+        filter(year>=input$slider[1]) %>%
+        filter(year<=input$slider[2])})
+  
+    output$pengPlot = renderPlotly({
+      penguinsBIS() %>%
+        ggplot() + ...
+      ...->toplot
+...
+    })
+    output$table = renderDataTable({
+      penguinsBIS()
+      })
+}
+```
+
+## Pratique Niv4 : sélection séquentielle de critères
+
+A l'aide de selectInput, mettre en place une sélection des données à représenter basée sur
+
+- species
+- island
+- sex
+
+## Pratique Niv4 : sélection séquentielle - ce qu'on est tenté de faire{.small}
+
+```{r graph multicrit1, eval = F, echo = T}
+
+ui <- fluidPage(
+...
+      selectInput("spsel", label = h3("Choisir l'espèce"),
+                  choices = list("ADELIE" = "Adelie", "CHINSTRAP" = "Chinstrap", "GENTOO" ="Gentoo"), selected="Adelie", multiple=F),
+      selectInput("islandsel", label = h3("Choisir l'île"),
+                  choices = list("BISCOE" = "Biscoe", "DREAM" = "Dream", "TORGENSEN" ="Torgersen"), selected="Biscoe", multiple=F),
+      selectInput("sexsel", label = h3("Choisir le sexe"),
+                  choices = list("Males" = "male", "Femelles" = "female", "Unrecorded"=NA), selected="male", multiple=F)
+      )
+...
+)
+```
+
+## Pratique Niv4 : sélection séquentielle - ce qu'on est tenté de faire{.small}
+
+```{r graph multicrit2, eval = F, echo = T}
+server<- function(input, output) {
+    output$pengPlot = renderPlotly({
+      penguins %>%
+        filter(species%in%input$spsel)%>%
+        filter(island%in%input$islandsel)%>%
+        filter(sex%in%input$sexsel)%>%
+        ggplot() + aes( x= flip_l, y=bm) + geom_point() + 
+        labs(x = 'Flipper length') +
+        labs(y = 'Body mass') +
+        theme_light()
+    })
+
+}
+```
+
+## Pratique Niv4 : sélection séquentielle - ce que ça donne {.small}
+
+```{r graph multicrit out, eval = TRUE, echo = F}
+
+ui <- fluidPage(
+  titlePanel("Exploration de données Pingouins"),
+  sidebarLayout(
+    sidebarPanel(
+      strong("Ma belle barre latérale"),
+      selectInput("spsel", label = h3("Choisir l'espèce"),
+                  choices = list("ADELIE" = "Adelie", "CHINSTRAP" = "Chinstrap", "GENTOO" ="Gentoo"), selected="Adelie", multiple=F),
+      selectInput("islandsel", label = h3("Choisir l'île"),
+                  choices = list("BISCOE" = "Biscoe", "DREAM" = "Dream", "TORGENSEN" ="Torgersen"), selected="Biscoe", multiple=F),
+      selectInput("sexsel", label = h3("Choisir le sexe"),
+                  choices = list("Males" = "male", "Femelles" = "female", "Unrecorded"=NA), selected="male", multiple=F)
+      )
+    ,
+  mainPanel(
+    "Panneau principal: ici sont représentées les sorties désirées",
+    plotlyOutput("pengPlot")
+    )
+  )
+)
+server<- function(input, output) {
+
+    output$pengPlot = renderPlotly({
+      penguins %>%
+        filter(species%in%input$spsel)%>%
+        filter(island%in%input$islandsel)%>%
+        filter(sex%in%input$sexsel)%>%
+        ggplot() + aes( x= flip_l, y=bm) + geom_point() + 
+        labs(x = 'Flipper length') +
+        labs(y = 'Body mass') +
+        theme_light()
+    })
+
+}
+shinyApp(ui, server)
+
+```
+
+## Le problème ... 
+
+En procédant ainsi, on met en évidence que certaines combinaisons de critères ne sont pas possiles : seule l'espèce Adélie est échantillonnée sur toutes les îles ..! 
+
+> - Propositions de filtres non-cohérents
+> - Affichage blanc pour les sélections impossibles
+
+## La solution ... 
+
+En procédant ainsi, on met en évidence que certaines combinaisons de critères ne sont pas possiles : seule l'espèce Adélie est échantillonnée sur toutes les îles ..! 
+
+On va donc chercher à contraindre les choix des menus déroulants aux seules combinaisons possibles.
+
+Ici on va utiliser une fonction d'"update" :
+
+```{r graph updateSelectInput, eval = F, echo = T}
+updateSelectInput(session,"NOM DU selectInput A UPDATER", "CONSIGNE", choices = " NOUVEAUX CHOIX", selected=" NOUVEAUX CHOIX ACTIFS")
+```
+
+(session sera à préciser à la fois dans la fonction update et comme paramètre d'entrée de la fonction *SERVER*)
+
+## La fonction observeEvent
+
+Et on aura beson d'une nouvelle fonction Shiny : observeEvent().
+
+Cette fonction nous permet de contrôler la réactivité (l'activité) de notre updateSelectInput.
+
+On va ainsi conditionner la mise à jour des champs proposés pour *"islands"* à l'espèce sélectionnée (donc dès qu'il y a un changement d'espèce) ; et les champs proposés pour *"sex"* à la combinaison espèce-île choisie (donc dès qu'il y a un changement d'espèce ou d'île).
+
+On crée un flux d'information de l'**"UI"** vers le **"SERVER"**  puis du  **"SERVER"** vers l'**"UI"** etc.
+
+## Pratique Niv4 : sélection séquentielle - ce qu'il faut faire {.smaller}
+
+```{r graph multicrit correct, eval = F, echo = T}
+
+ui <- fluidPage(
+...
+      selectInput("spsel", label = h3("Choisir l'espèce"),
+                  choices = list("ADELIE" = "Adelie", "CHINSTRAP" = "Chinstrap", "GENTOO" ="Gentoo"), selected="Adelie", multiple=F),
+      selectInput("islandsel", label = h3("Choisir l'île"),
+                  choices = list("BISCOE" = "Biscoe", "DREAM" = "Dream", "TORGENSEN" ="Torgersen"), selected="Biscoe", multiple=F),
+            selectInput("sexsel", label = h3("Choisir le sexe"),
+                  choices = list("Males" = "male", "Femelles" = "female", "Unrecorded"=NA), selected="male", multiple=F)
+      )
+...
+)
+```
+
+## Pratique Niv4 : sélection séquentielle - ce qu'il faut faire{.smaller}
+
+```{r graph multicrit correct2, eval = F, echo = T}
+server<- function(input, output, session) {
+  
+  observeEvent(input$spsel, {
+    newislands <- as.character(unique(penguins$island[which(penguins$species%in%input$spsel)])) 
+    updateSelectInput(session,"islandsel", "Choisir l'île", choices = c(newislands), selected=c(newislands)[1])
+  })
+
+ observeEvent(input$spsel, {
+   newsex <- as.character(unique(penguins$sex[which(penguins$species%in%input$spsel & penguins$island%in%input$islandsel)]))
+   updateSelectInput(session,"sexsel", "Choisir le sexe", choices = c(newsex), selected=c(newsex)[1])
+ })
+ 
+ observeEvent(input$islandsel, {
+   newsex <- as.character(unique(penguins$sex[which(penguins$species%in%input$spsel & penguins$island%in%input$islandsel)])) 
+   updateSelectInput(session,"sexsel", "Choisir le sexe", choices = c(newsex), selected=c(newsex)[1])
+ })
+}
+```
+
+## Pratique Niv4 : sélection séquentielle - ce que ça donne
+
+```{r graph multicrit correct3, eval = TRUE, echo = F}
+
+ui <- fluidPage(
+  titlePanel("Exploration de données Pingouins"),
+  sidebarLayout(
+    sidebarPanel(
+      strong("Ma belle barre latérale"),
+      selectInput("spsel", label = h3("Choisir l'espèce"),
+                  choices = list("ADELIE" = "Adelie", "CHINSTRAP" = "Chinstrap", "GENTOO" ="Gentoo"), selected="Adelie", multiple=F),
+      selectInput("islandsel", label = h3("Choisir l'île"),
+                  choices = list("BISCOE" = "Biscoe", "DREAM" = "Dream", "TORGENSEN" ="Torgersen"), selected="Biscoe", multiple=F),
+            selectInput("sexsel", label = h3("Choisir le sexe"),
+                  choices = list("Males" = "male", "Femelles" = "female", "Unrecorded"=NA), selected="male", multiple=F)
+      )
+    ,
+  mainPanel(
+    "Panneau principal: ici sont représentées les sorties désirées",
+    plotlyOutput("pengPlot")
+    )
+  )
+)
+server<- function(input, output, session) {
+  
+  observeEvent(input$spsel, {
+    newislands <- as.character(unique(penguins$island[which(penguins$species%in%input$spsel)])) 
+    updateSelectInput(session,"islandsel", "Choisir l'île", choices = c(newislands), selected=c(newislands)[1])
+  })
+
+ observeEvent(input$spsel, {
+   newsex <- as.character(unique(penguins$sex[which(penguins$species%in%input$spsel & penguins$island%in%input$islandsel)]))
+   updateSelectInput(session,"sexsel", "Choisir le sexe", choices = c(newsex), selected=c(newsex)[1])
+ })
+ 
+ observeEvent(input$islandsel, {
+   newsex <- as.character(unique(penguins$sex[which(penguins$species%in%input$spsel & penguins$island%in%input$islandsel)])) 
+   updateSelectInput(session,"sexsel", "Choisir le sexe", choices = c(newsex), selected=c(newsex)[1])
+ })
+
+
+    output$pengPlot = renderPlotly({
+      penguins %>%
+        filter(species%in%input$spsel)%>%
+        filter(island%in%input$islandsel)%>%
+        filter(sex%in%input$sexsel)%>%
+        ggplot() + aes( x= flip_l, y=bm) + geom_point() + 
+        labs(x = 'Flipper length') +
+        labs(y = 'Body mass') +
+        theme_light()
+    })
+
+}
+shinyApp(ui, server)
+
+```
+
+## Pour aller + loin
+
+Autres fonctions Shiny permettant de contrôler la réactivité des objets 
+
+- isolate() = empêcher la réactivité d'un objet
+- observe() = équivalent à observeEvent mais 
+- reactiveEvent() = la réactivité est déclenchée uniquement une fois qu'un évènement précis a lieu (affichage du graph après sélection des critères que lorsque l'on aclique sur un *actionButton*). 
+
+## Structurer un tableau de bord
+
+Nous avons vu un exemple d'application simple : Une seule fenêtre et un seul graph.
+Mais on peut compelxifier la structure de l'application en utilisant différentes tables dans notre paneau principal et en affichant plusieurs grapiques sur la page.
+
+Des panneaux peuvent être créer pour disposer de plusieurs pages d'affichage.
+
+## Structurer un tableau de bord
+
+```{r panels, eval = T, echo = F}
+ui <- fluidPage(
+  titlePanel("Exploration de données Pingouins"),
+  sidebarLayout(
+    sidebarPanel(
+      strong("Ma belle barre latérale"),
+      selectInput("select", label = h3("Choisir une espèce"),
+                  choices = list("ADELIE" = "Adelie", "CHINSTRAP" = "Chinstrap", "GENTOO" ="Gentoo"),
+                  selected = "Adelie", multiple=T),
+      sliderInput("slider", label = h3("Choisir une période"), min = 2007, max = 2009, value = c(2007,2009)),
+      checkboxGroupInput("checkbox1", label = "Draw regression", choices=c("Linear reg."="linear","Loess"="loess")),
+      checkboxInput("checkbox2", label = "Represent uncertainty", value = FALSE)
+    )
+    ,
+    mainPanel(
+      "Panneau principal: ici sont représentées les sorties désirées",
+      tabsetPanel(
+        tabPanel("Graphiques",
+                 plotlyOutput("pengPlot")),
+        tabPanel("Donnée",
+                 dataTableOutput("table"))     
+                 
+      )
+    )
+  )
+)
+server<- function(input, output) {
+  
+  penguinsBIS<-reactive({penguins%>% 
+      filter(species%in%input$select) %>%
+      filter(year>=input$slider[1]) %>%
+      filter(year<=input$slider[2])})
+  
+  output$pengPlot = renderPlotly({
+    
+    penguinsBIS() %>%
+      ggplot() + aes( x= bill_l, y=bill_d,col = species) + geom_point() + 
+      labs( x = 'Bill length in mm') +
+      labs(y = 'Bill depth in mm') +
+      labs(color = "Species")+
+      theme_light()->toplot
+    
+    if("linear"%in%input$checkbox1){
+      toplot<-toplot+geom_smooth(method = 'lm', se = input$checkbox2)
+    }
+    if("loess"%in%input$checkbox1){
+      toplot<-toplot+geom_smooth(method = 'loess', se = input$checkbox2)
+    }
+    
+    toplot
+    
+  })
+  
+  output$table = renderDataTable({
+    penguinsBIS()
+  })
+  
+}
+shinyApp(ui, server)
+```
+
+## Structurer un tableau de bord
+
+Nous avons vu un exemple d'application simple : Une seule fenêtre et un seul graph.
+Mais on peut compelxifier la structure de l'application en utilisant différentes tables dans notre paneau principal et en affichant plusieurs grapiques sur la page.
+
+Des panneaux peuvent être créer pour disposer de plusieurs pages d'affichage.
+
+La mise en page d'une application Shiny repose sur une grille définie par 12 colonnes et 12 lignes.
+
+## Structurer un tableau de bord
+
+```{r columns, eval = T, echo = F}
+ui <- fluidPage(width=12,
+  titlePanel("Exploration de données Pingouins"),
+  sidebarLayout(
+    sidebarPanel(width = 3,
+      strong("Ma belle barre latérale"),
+      selectInput("select", label = h3("Choisir une espèce"),
+                  choices = list("ADELIE" = "Adelie", "CHINSTRAP" = "Chinstrap", "GENTOO" ="Gentoo"),
+                  selected = "Adelie", multiple=T),
+      sliderInput("slider", label = h3("Choisir une période"), min = 2007, max = 2009, value = c(2007,2009)),
+      checkboxGroupInput("checkbox1", label = "Draw regression", choices=c("Linear reg."="linear","Loess"="loess")),
+      checkboxInput("checkbox2", label = "Represent uncertainty", value = FALSE)
+    )
+    ,
+    mainPanel(
+      "Panneau principal: ici sont représentées les sorties désirées",
+      tabsetPanel(
+        tabPanel("Graphiques",
+                 
+                 fluidRow(
+                   
+                   column(12,
+                          plotlyOutput("pengPlot1"),
+                          
+                          fluidRow(
+                          
+                          column(6,
+                                 plotlyOutput("pengPlot2")),
+                                 
+                          column(6,
+                                 plotlyOutput("pengPlot3"))
+
+                          )
+                          
+                        )
+                   )
+                 ),
+        
+        tabPanel("Donnée",
+                 dataTableOutput("table"))     
+                 
+      )
+    )
+  )
+)
+server<- function(input, output) {
+  
+  penguinsBIS<-reactive({penguins%>% 
+      filter(species%in%input$select) %>%
+      filter(year>=input$slider[1]) %>%
+      filter(year<=input$slider[2])})
+  
+  output$pengPlot1 = renderPlotly({
+    
+    penguinsBIS() %>% 
+      ggplot() + aes( x= bill_l, y=bill_d,col = species) + geom_point() + 
+      labs( x = 'Bill length in mm') +
+      labs(y = 'Bill depth in mm') +
+      labs(color = "Species")+
+      theme_light()+
+      theme(legend.position = "none") -> toplot
+    
+    if("linear"%in%input$checkbox1){
+      toplot<-toplot+geom_smooth(method = 'lm', se = input$checkbox2)
+    }
+    if("loess"%in%input$checkbox1){
+      toplot<-toplot+geom_smooth(method = 'loess', se = input$checkbox2)
+    }
+    
+    toplot
+    
+  })
+  
+  output$pengPlot2 = renderPlotly({
+    
+    penguinsBIS() %>% 
+      ggplot() + aes(x= bill_l, fill = species) + geom_histogram(stat="count", alpha=0.5,position = 'identity') + 
+      labs( x = 'Bill length in mm') +
+      labs(y = 'Counts') +
+      labs(color = "Species")+
+      theme_light()+
+      theme(legend.position = "none") -> toplot2
+    
+    toplot2
+    
+  })
+  
+  output$pengPlot3 = renderPlotly({
+    
+    penguinsBIS() %>% 
+     ggplot() + aes(x= bill_d, fill = species) + geom_histogram(stat="count", alpha=0.5,position = 'identity') + 
+     labs( x = 'Bill depth in mm') +
+     labs(y = 'Counts') +
+     labs(color = "Species")+
+     theme_light() -> toplot2
+    
+    toplot2
+    
+  })
+  
+  output$table = renderDataTable({
+    penguinsBIS()
+  })
+  
+}
+shinyApp(ui, server)
+```
+
+## Notions d'esthétique
+
+Utilisation de packages spécifique :
+
+> - [shinytheme](https://rstudio.github.io/shinythemes/)
+
+(*cyborg*, *superhero*, *darkly*, *united* etc. Il faut être indulgent pour les noms de thèmes, les mecs sont à la fois geeks et américains)
+
+## Notions d'esthétique
+
+```{r shinytheme1, eval = T, echo = F}
+shinyApp(
+  ui = fluidPage(
+    titlePanel("Theme 'superhero':"),
+    theme = shinytheme("superhero"), 
+    sidebarPanel(
+      textInput("txt", "Theme 'superhero':", "text here"),
+      sliderInput("slider", "Slider input:", 1, 100, 30),
+      actionButton("action", "Button"),
+      actionButton("action2", "Button2", class = "btn-primary")
+    ),
+    mainPanel(
+      tabsetPanel(
+        tabPanel("Tab 1"),
+        tabPanel("Tab 2")
+      )
+    )
+  ),
+  server = function(input, output) {}
+)
+```
+
+## Notions d'esthétique
+
+```{r shinytheme2, eval = T, echo = F}
+shinyApp(
+  ui = fluidPage(
+    titlePanel("Theme 'united'"),
+    theme = shinytheme("united"), 
+    sidebarPanel(
+      textInput("txt", "Theme 'united':", "text here"),
+      sliderInput("slider", "Slider input:", 1, 100, 30),
+      actionButton("action", "Button"),
+      actionButton("action2", "Button2", class = "btn-primary")
+    ),
+    mainPanel(
+      tabsetPanel(
+        tabPanel("Tab 1"),
+        tabPanel("Tab 2")
+      )
+    )
+  ),
+  server = function(input, output) {}
+)
+```
+
+## Notions d'esthétique
+
+Utilisation de packages spécifique :
+
+- [shinytheme](https://rstudio.github.io/shinythemes/)
+- [shinydashboard](https://rstudio.github.io/shinydashboard/)
+organiser l'espace en "boxes"
+avoir des menus déroulants
+créer une barre latérale bien pratique maximisant l'espace etc
+
+## Notions d'esthétique
+
+```{r shinydashboard, eval = T, echo = F}
+body <- dashboardBody(
+  fluidRow(
+    tabBox(
+      title = "First tabBox",
+      # The id lets us use input$tabset1 on the server to find the current tab
+      id = "tabset1", height = "250px",
+      tabPanel("Tab1", "First tab content"),
+      tabPanel("Tab2", "Tab content 2")
+    ),
+    tabBox(
+      side = "right", height = "250px",
+      selected = "Tab3",
+      tabPanel("Tab1", "Tab content 1"),
+      tabPanel("Tab2", "Tab content 2"),
+      tabPanel("Tab3", "Note that when side=right, the tab order is reversed.")
+    )
+  ),
+  fluidRow(
+    tabBox(
+      # Title can include an icon
+      title = tagList(shiny::icon("gear"), "tabBox status"),
+      tabPanel("Tab1",
+        "Currently selected tab from first box:",
+        verbatimTextOutput("tabset1Selected")
+      ),
+      tabPanel("Tab2", "Tab content 2")
+    )
+  )
+)
+
+shinyApp(
+  ui = dashboardPage(
+    dashboardHeader(title = "tabBoxes"),
+    dashboardSidebar(),
+    body
+  ),
+  server = function(input, output) {
+    # The currently selected tab from the first box
+    output$tabset1Selected <- renderText({
+      input$tabset1
+    })
+  }
+)
+```
+
+
+## Notions d'esthétique
+
+Utilisation de packages spécifique :
+
+- [shinytheme](https://rstudio.github.io/shinythemes/)
+- [shinydashboard](https://rstudio.github.io/shinydashboard/)
+organiser l'espace en "boxes"
+créer une barre latérale bien pratique maximisant l'espace 
+- l'option html/css : htoml directement dans l'appli ; css aégalement ou logé dans un document externe.
+
+
+## Apprendre à piller
+
+De nombreuses applications Shiny présentes sur internet fournissent un lien vers le code source. Ne pas hésiter à aller piocher ce qui vous intéresse dans ces applications et les insérer dans la votre.
+
+- La Shiny Gallery : <https://shiny.rstudio.com/gallery/>.
+
+
+## Application ou Application Web
+
+Deux cas de figure  
+
+> - Application simple : Travailler en local sur son propre jeu de données. Accessible sans connection
+> - Application Web : Travailler en ligne sur un jeu de données commun ou son propre jeu de données
+
+## Publier (ou pas?) une application shiny
+
+Définir le besoin :
+
+> - Partager un outil ?
+> - Pour quel type de traitement ?
+> - Partager de la donnée ?
+
+## Publier une application shiny
+
+Une application fonctionne sur un serveur. Ce serveur peut-être
+
+> - Un serveur institutionnel
+> - Votre serveur perso (**Jérôme Geekon** je suis sûr que tu en as un à la maison)
+> - Un serveur perso [shiny.io](https://www.shinyapps.io/)
+
+## Publier une application shiny sur server shinyio
+
+Compte gratuit donne accès à 5 applications maximum. Sinon, si on veut en créer une nouvelle il faut en retirer une.
+
+
+Préliminaire :
+
+> - (c'est mieux de le faire au moment où on commence à développer l'appli) on bosse au sein d'un projet RStudio type Shiny 
+> - l'application est dans un simple script .R 
+> - les packages requis sont appelés en tête de script
+> - les données nécessaires se trouvent dans un dossier "data" ou alors sont chargées explicitement dans le scrpt app.R en utilisant le chemin vers l'emplacement en question.
+
+## Publier une application shiny sur server shinyio
+
+Compte gratuit donne accès à 5 applications maximum. Sinon, si on veut en créer une nouvelle il faut en retirer une.
+
+1. Cliquer sur le petit icône bleu en haut à droite de la fenêtre où s'affiche votre application.
+
+2. Entrer vos identifiant et mot de passe shiny.io.
+
+3. Sélectionner les dossiers/fichiers nécessaires au fonctionnement de votre application
+
+4. Lancer la procédure (+/- long suivant la complexité de votre application). Une fenêtre vers votre application en ligne s'affichera une fois l'application déployée sur les serveurs de RStudio
+
+
+## ou pas? 
+
+> - Diffuser ses scripts et ses données :(
+> - Crée un paquet déposé sur le CRAN, GitHub etc. :) - expl de Factoshiny pour les locaux
+
+## Et n'oubliez pas...
+
+Don't Worry...
+
+## Et n'oubliez pas...
+
+Don't Worry...
+
+  Be Shiny
