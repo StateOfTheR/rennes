@@ -2,11 +2,9 @@ on:
   push:
     branches: master
 
-name: blogdown
-
-jobs:
   build:
-    runs-on: macOS-latest
+    runs-on: ubuntu-latest
+    container: mpetienne/sotr-rennes:0.1
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:
@@ -15,14 +13,6 @@ jobs:
 
       - name: Setup R
         uses: r-lib/actions/setup-r@master
-
-      - name: Install pandoc and pandoc citeproc
-        run: |
-          brew install pandoc
-
-      - name: Install packages
-        run: |
-          R -e 'install.packages(c( "distill", "rmarkdown"))'
 
       - name: Build site
         run: |
