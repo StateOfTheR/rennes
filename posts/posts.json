@@ -13,7 +13,7 @@
     "categories": [],
     "contents": "\nR dispose aujourd’hui d’outils de cartographie puissants et accessibles, notamment grâce au package sf.\nJérôme Guitton gère régulièrement des données spatiales et il nous a proposé aujourd’hui de découvrir avec lui comment construire des cartes. Cette séance a aussi l’occasion de visiter des visualisations classiquement utilisées en halieutique.\nComme d’habitude vous trouverez la présentation * la présentation * et le script\n\n\n\n",
     "preview": {},
-    "last_modified": "2021-03-11T23:23:28+00:00",
+    "last_modified": "2021-03-11T23:30:22+00:00",
     "input_file": {}
   },
   {
@@ -30,7 +30,7 @@
     "categories": [],
     "contents": "\nShiny est un outil simple pour créer des applications web interactives. Pierre Yves Hernvann a construit une belle aplication Shiny pour le groupe en charge de l’évaluation des stocks de salmonidés au CIEM. Le 10 février, il nous a proposé une introduction à Shiny pour bien démarrer avec cet outil.\nLa présentation est disponible.\nLe script de l’application shiny créée durant la séance est disponible ici.\n\n\n\n",
     "preview": {},
-    "last_modified": "2021-03-11T23:23:28+00:00",
+    "last_modified": "2021-03-11T23:30:22+00:00",
     "input_file": {}
   },
   {
@@ -47,7 +47,7 @@
     "categories": [],
     "contents": "\nLe 7 janvier 2021 Jean-Louis Marchand nous a proposé une introduction au tidyverse pour un code lisible et reproductible.\nLa présentation est disponible ainsi que le fichier Markkdown correspondant.\n\n\n\n",
     "preview": {},
-    "last_modified": "2021-03-11T23:23:27+00:00",
+    "last_modified": "2021-03-11T23:30:21+00:00",
     "input_file": {}
   },
   {
@@ -64,7 +64,7 @@
     "categories": [],
     "contents": "\nLe 22 octobre Pierre-André Cornillon nous a présenté les fonctionnalités du package data.table qui promet une manipulation efficace des données.\nLa présentation est disponible, ainsi que la feuille d’exercices qu’il a préparée. Le jeu de données LTER.csv est utilisé pour le TD.\n\n\n\n",
     "preview": {},
-    "last_modified": "2021-03-11T23:23:27+00:00",
+    "last_modified": "2021-03-11T23:30:21+00:00",
     "input_file": {}
   },
   {
@@ -81,7 +81,7 @@
     "categories": [],
     "contents": "\nLa première séance a permis de se rencnontrer et de discuter du fonctionnement du groupe (une séance mensuelle, à priori le dernier jeudi de chaque mois sauf exception).\nCette première séance a porté sur la création de graphique avec ggplot. Les slides et le code utilisés sont disponibles sur github.\nLes packages nécessaires peuvent être installés par les commandes suivantes :\n\n\n#install.packages(\"remotes\")\n#install.packages(c(\"devtools\",\"plotly\",\"ggpubr\",\"gifski\"))\ninstall.packages(c(\"magick\",\"gganimate\",\"GGally\"))\ninstall.packages(c(\"wesanderson\",\"ggmap\",\"rnaturalearth\",\"rnaturalearthdata\",\"rgeos\"))\nremotes::install_github(\"ropensci/osmdata\")\n\n\n\n\n\n\n",
     "preview": {},
-    "last_modified": "2021-03-11T23:23:26+00:00",
+    "last_modified": "2021-03-11T23:30:20+00:00",
     "input_file": {}
   },
   {
@@ -98,7 +98,7 @@
     "categories": [],
     "contents": "\nDepuis 2017, le groupe State Of The R tient des ateliers autour de l’utilisation avancée du logiciel R à Paris. Un bootcamp a également lieu chaque année (2020, 2019, 2018, 2017).\nL’idée est née en 2020 d’organiser des ateliers mensuels à Rennes, sur le site d’Agrocampus. Ces ateliers sont participatifs et toute personne désirant s’investir est la bienvenue. La participation aux atliers vaut engagement pour proposer un atelier.\n\n\n\n",
     "preview": {},
-    "last_modified": "2021-03-11T23:23:29+00:00",
+    "last_modified": "2021-03-11T23:30:23+00:00",
     "input_file": {}
   }
 ]
