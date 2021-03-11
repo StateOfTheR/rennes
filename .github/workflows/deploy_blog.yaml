@@ -1,3 +1,5 @@
+name: build_sites
+
 on:
   push:
     branches: master
