@@ -6,7 +6,7 @@ for(f in   list.files('_posts/', recursive = TRUE, pattern = '.Rmd',
                       full.names = TRUE))
   rmarkdown::render(f)
 ## render presentation
-pres_list <- c("script_presentation_SOTR_ShinyApps.Rmd")
+pres_list <- c("sscript_ShinyApps_PYH.Rmd")
 for(f in   pres_list)
   rmarkdown::render(file.path("_presentation",f))
 
