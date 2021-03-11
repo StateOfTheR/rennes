@@ -11,4 +11,4 @@ RUN R -e "install.packages('FactoMineR')"
 RUN R -e "remotes::install_github('yihui/xaringan')"
 RUN R -e "remotes::install_github('gadenbuie/xaringanExtra')"
 RUN R -e "remotes::install_github('EvaMaeRey/flipbookr')"
-
+RUN R -e "install.packages('palmerpenguins')"

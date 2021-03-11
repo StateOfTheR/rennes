@@ -7,7 +7,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: mpetienne/sotr-rennes:0.11
+    container: mpetienne/sotr-rennes:0.12
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:
