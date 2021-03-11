@@ -1,0 +1,27 @@
+---
+title: "Dessiner des cartes avec R"
+description: |
+  Des outils et des méthodes pour utiliser R comme un logiciel de cartographie proposés par Jérôme Guitton.
+author:
+  - name: Marie Etienne
+    url: {}
+date: 03-11-2021
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+R dispose aujourd'hui d'outils de cartographie puissants et accessibles, notamment grâce au package `sf`.
+
+Jérôme Guitton gère régulièrement des données spatiales et il nous a proposé aujourd'hui de découvrir avec lui comment construire des cartes. Cette séance a aussi l'occasion de visiter des visualisations classiquement utilisées en halieutique.
+
+Comme d'habitude vous trouverez la présentation
+* la [présentation](http://halieut.agrocampus-ouest.fr/BAS/scripts/BAS_jerome/39/)
+* et le [script](https://raw.githubusercontent.com/StateOfTheR/rennes/master/presentation/cartographie_JG.Rmd)
+
+
