@@ -23,6 +23,6 @@ Le 10 février, il nous a proposé une introduction à Shiny pour bien démarrer
 
 La présentation est [disponible](../../presentation/SOTR_ShinyApps_PYH.html).
 
-Le script de l'application shiny créée durant la séance est disponible  [ici](https://raw.githubusercontent.com/StateOfTheR/rennes/master/presentation/script_ShinyApps_PYH.R).
+Le script de l'application shiny créée durant la séance est disponible  [ici](https://raw.githubusercontent.com/StateOfTheR/rennes/master/_presentation/script_ShinyApps_PYH.R).
 
 
